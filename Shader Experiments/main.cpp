@@ -1,12 +1,23 @@
-#include <glm/glm.hpp>
-#include <gl/glew.h>
-#include <SDL.h>
-#include "stb_image.h"
-#include <imgui.h>
+#include "Application.h"
 
-int main(int argc, char* argv[])
+int main(int argc, char** argv)
 {
-	SDL_Init(SDL_INIT_EVERYTHING);
+	Application app;
+
+	app.Init();
+
+	app.Setup();
+
+	while (app.running)
+	{
+		app.ProcessInput();
+
+		app.Update();
+
+		app.Render();
+	}
+
+	app.Destroy();
 
 	return 0;
 }
