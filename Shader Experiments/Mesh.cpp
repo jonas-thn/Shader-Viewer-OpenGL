@@ -105,7 +105,7 @@ void Mesh::SetScale(glm::vec3 scale)
 	model[3] = glm::vec4(translation, 1.0f);
 }
 
-void Mesh::Draw(Shader& shader, glm::mat4& view, glm::mat4& projection) const
+void Mesh::Draw(Shader& shader, glm::mat4& view, glm::mat4& projection, glm::vec3& camPos) const
 {
 	if (vertices.empty()) return;
 
@@ -113,6 +113,7 @@ void Mesh::Draw(Shader& shader, glm::mat4& view, glm::mat4& projection) const
 	shader.SetMat4("model", model);
 	shader.SetMat4("view", view);
 	shader.SetMat4("projection", projection);
+	shader.SetVec3("cameraPos", camPos);
 
 	glBindVertexArray(VAO);
 	if (indices.empty())

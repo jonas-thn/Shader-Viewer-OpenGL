@@ -74,7 +74,9 @@ void Application::Init()
 	style.Colors[ImGuiCol_NavWindowingHighlight] = grey06Color;
 	style.Colors[ImGuiCol_NavWindowingDimBg] = ImVec4(0, 0, 0, 0.4f);
 	style.Colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0, 0, 0, 0.4f);
+	style.WindowPadding = ImVec2(20.0f, 20.0f);
 
+	glEnable(GL_DEPTH_TEST);
 	glViewport(-uiWidth, 0, width + uiWidth, height);
 }
 
@@ -90,7 +92,19 @@ void Application::Setup()
 	standardShader.Init();
 
 	//Meshes
-	triangle.Init();
+	monkey.Init();
+
+	sphere.Init();
+	sphere.Translate(glm::vec3(2.0f, 0.0f, 0.0f));
+
+	pyramid.Init();
+	pyramid.Translate(glm::vec3(-2.0f, 0.0f, 0.0f));
+
+	cube.Init();
+	cube.Translate(glm::vec3(0.0f, 0.0f, -2.0f));
+
+	ring.Init();
+	ring.Translate(glm::vec3(0.0f, 0.0f, 2.0f));
 }
 
 void Application::ProcessInput()
@@ -110,6 +124,7 @@ void Application::ProcessInput()
 			{
 				width = event.window.data1;
 				height = event.window.data2;
+				projection = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 100.0f);
 				glViewport(-uiWidth, 0, width + uiWidth, height);
 			}
 		}
@@ -124,14 +139,13 @@ void Application::Update()
 	uiWidth = width * uiWidthPercent;
 	
 	static float angle = 0.0f;
-	angle += camSpeed * deltaTime;
-	glm::vec3 camPos;
+	angle -= camSpeed * deltaTime;
 
 	camPos.x = sin(angle) * camRadius;
 	camPos.y = 0.0f; 
 	camPos.z = cos(angle) * camRadius;
 
-	view = glm::lookAt(camPos, //cam pos
+	view = glm::lookAt(camPos + glm::vec3(0.0, 1.5, 0.0), //cam pos
 		glm::vec3(0.0f, 0.0f, 0.0f), //look at
 		glm::vec3(0.0f, 1.0f, 0.0f) //up
 	);
@@ -168,8 +182,20 @@ void Application::DrawGUI()
 	ImGui::SetNextWindowPos(ImVec2(width - uiWidth, 0));
 	ImGui::SetNextWindowSize(ImVec2(uiWidth, height));
 
-	ImGui::Begin("Ui Test", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollWithMouse);
+	ImGui::Begin("Shader Scenes", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollWithMouse);
 
+	const int numScenes = 5;
+	const int buttonHeight = (height / numScenes) - (numScenes * 5.1);
+
+	ImGui::Button("Simple Lighting", ImVec2(-1, buttonHeight));
+	ImGui::Dummy(ImVec2(0.0, 10.0));
+	ImGui::Button("Scene2", ImVec2(-1, buttonHeight));
+	ImGui::Dummy(ImVec2(0.0, 10.0));
+	ImGui::Button("Scene3", ImVec2(-1, buttonHeight));
+	ImGui::Dummy(ImVec2(0.0, 10.0));
+	ImGui::Button("Scene4", ImVec2(-1, buttonHeight));
+	ImGui::Dummy(ImVec2(0.0, 10.0));
+	ImGui::Button("Scene5", ImVec2(-1, buttonHeight));
 
 	ImGui::End();
 
@@ -178,8 +204,14 @@ void Application::DrawGUI()
 
 void Application::DrawScene()
 {
-	glClearColor(0.25, 0.4, 0.5, 1.0);
-	glClear(GL_COLOR_BUFFER_BIT);
-	triangle.Draw(standardShader, view, projection);
+	glClearColor(0.1, 0.1, 0.105, 1.1);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	monkey.Draw(standardShader, view, projection, camPos);
+	sphere.Draw(standardShader, view, projection, camPos);
+	pyramid.Draw(standardShader, view, projection, camPos);
+	cube.Draw(standardShader, view, projection, camPos);
+	ring.Draw(standardShader, view, projection, camPos);
+
 }
 

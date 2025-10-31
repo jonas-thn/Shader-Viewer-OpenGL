@@ -40,19 +40,18 @@ private:
 
 	Shader standardShader = Shader("Shader/Standard/standardShader.vert", "Shader/Standard/standardShader.frag");
 
-	Mesh quad = Mesh(
-		std::vector<float>(std::begin(quadVertices), std::end(quadVertices)),
-		std::vector<unsigned int>(std::begin(quadIndices), std::end(quadIndices))
-	);
+	Mesh pyramid = Mesh("./Models/pyramid.obj");
+	Mesh sphere = Mesh("./Models/sphere.obj");
+	Mesh monkey = Mesh("./Models/monkey.obj");
+	Mesh cube = Mesh("./Models/cube.obj");
+	Mesh ring = Mesh("./Models/ring.obj");
 
-	std::vector<Mesh*> meshList;
-	Mesh triangle = Mesh("./Models/triangle.obj"); 
-
+	glm::vec3 camPos;
 	glm::mat4 projection = glm::mat4(1.0f);
 	glm::mat4 view = glm::mat4(1.0f);
 
-	float camRadius = 5.0f;
-	float camSpeed = 2.0f;
+	float camRadius = 3.5f;
+	float camSpeed = 1.5f;
 
 	float uiWidthPercent = 0.35f;
 	int uiWidth = width * uiWidthPercent;
