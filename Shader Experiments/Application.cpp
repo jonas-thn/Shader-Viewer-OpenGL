@@ -47,7 +47,10 @@ void Application::Setup()
 	glBindVertexArray(0);
 
 	//Shader
-	shader.Init();
+	standardShader.Init();
+
+	//Meshes
+	triangle.Init();
 }
 
 void Application::ProcessInput()
@@ -83,9 +86,13 @@ void Application::Render()
 	glClearColor(0.25, 0.4, 0.5, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	shader.Use();
+	/*standardShader.Use();
 	glBindVertexArray(VAO);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glDrawArrays(GL_TRIANGLES, 0, 3);*/
+
+	glm::mat4 matrix = glm::mat4(1.0f);
+
+	triangle.Draw(standardShader, matrix, matrix);
 
 	SDL_GL_SwapWindow(window);
 }

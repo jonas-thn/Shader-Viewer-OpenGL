@@ -6,6 +6,7 @@
 
 #include "MeshData.h"
 #include "Shader.h"
+#include "Mesh.h"
 
 class Application
 {
@@ -35,6 +36,13 @@ private:
 	unsigned int VBO;
 	unsigned int VAO;
 
-	Shader shader = Shader("Shader/Standard/standardShader.vert", "Shader/Standard/standardShader.frag");
+	Shader standardShader = Shader("Shader/Standard/standardShader.vert", "Shader/Standard/standardShader.frag");
+
+	Mesh quad = Mesh(
+		std::vector<float>(std::begin(quadVertices), std::end(quadVertices)),
+		std::vector<unsigned int>(std::begin(quadIndices), std::end(quadIndices))
+	);
+
+	Mesh triangle = Mesh("./Models/triangle.obj");
 };
 
