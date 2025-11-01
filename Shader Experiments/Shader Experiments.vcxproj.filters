@@ -51,6 +51,9 @@
     <ClCompile Include="ImGui\imgui_widgets.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Scenes\LightingScene\LightingScene.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image.h">
@@ -95,10 +98,18 @@
     <ClInclude Include="ImGui\imstb_truetype.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Scenes\Scene.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\LightingScene\LightingScene.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\Standard\standardShader.vert" />
     <None Include="Shader\Standard\standardShader.frag" />
+    <None Include="Shader\Lighting\lightingShader.vert" />
+    <None Include="Shader\Lighting\lightingShader.frag" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ImGui\LICENSE.txt" />

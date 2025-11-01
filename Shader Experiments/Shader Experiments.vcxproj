@@ -143,6 +143,7 @@
     <ClCompile Include="ImGui\imgui_impl_sdl2.cpp" />
     <ClCompile Include="ImGui\imgui_tables.cpp" />
     <ClCompile Include="ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="Scenes\LightingScene\LightingScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -159,12 +160,16 @@
     <ClInclude Include="ImGui\imstb_rectpack.h" />
     <ClInclude Include="ImGui\imstb_textedit.h" />
     <ClInclude Include="ImGui\imstb_truetype.h" />
+    <ClInclude Include="Scenes\LightingScene\LightingScene.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshData.h" />
+    <ClInclude Include="Scenes\Scene.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Shader\Lighting\lightingShader.frag" />
+    <None Include="Shader\Lighting\lightingShader.vert" />
     <None Include="Shader\Standard\standardShader.frag" />
     <None Include="Shader\Standard\standardShader.vert" />
   </ItemGroup>

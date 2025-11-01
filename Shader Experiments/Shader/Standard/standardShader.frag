@@ -10,40 +10,7 @@ out vec4 FragColor;
 
 void main()
 {
-	//base
 	vec3 baseColor = vec3(1.0);
-	vec3 normal = normalize(Normals);
-	vec3 viewDir = normalize(cameraPos - FragPos);
 
-	//ambient
-	vec3 ambient = vec3(0.09, 0.09, 0.11);
-
-	//hemi
-	vec3 skyColor = vec3(0.0, 0.02, 0.1);
-	vec3 groundColor = vec3(0.1, 0.04, 0.0);
-	float hemiMix = (normal.y + 1.0) * 0.5;
-	vec3 hemi = mix(groundColor, skyColor, hemiMix);
-
-	//diffuse
-	vec3 lightDir = normalize(vec3(1.0, 1.0, 1.0));
-	vec3 lightColor = vec3(0.9, 0.85, 0.75);
-	float diffuseAmount = max(0.0, dot(lightDir, normal));
-	vec3 diffuse = diffuseAmount * lightColor;
-
-	//specular
-	vec3 reflection = normalize(reflect(-lightDir, normal));
-	float specularValue = pow(max(0.0, dot(viewDir, reflection)), 64.0);
-	vec3 specular = vec3(specularValue);
-
-	//fresnel
-	vec3 fresnelColor = vec3(0.9, 0.8, 0.5);
-	float fresnelValue = 1 - dot(viewDir, normal);
-	fresnelValue = clamp(pow(fresnelValue, 5.0), 0.0, 1.0);
-	vec3 fresnel = fresnelValue * fresnelColor;
-
-	//final
-	vec3 finalColor = baseColor * ambient * 0.5 + hemi * 0.5 + diffuse + specular + fresnel * 0.2;
-	finalColor = clamp(finalColor, 0.0, 1.0);
-
-	FragColor = vec4(finalColor, 1.0);
+	FragColor = vec4(baseColor, 1.0);
 }

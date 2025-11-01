@@ -88,23 +88,7 @@ void Application::Setup()
 		glm::vec3(0.0f, 1.0f, 0.0f) //up
 	);
 
-	//Shader
-	standardShader.Init();
-
-	//Meshes
-	monkey.Init();
-
-	sphere.Init();
-	sphere.Translate(glm::vec3(2.0f, 0.0f, 0.0f));
-
-	pyramid.Init();
-	pyramid.Translate(glm::vec3(-2.0f, 0.0f, 0.0f));
-
-	cube.Init();
-	cube.Translate(glm::vec3(0.0f, 0.0f, -2.0f));
-
-	ring.Init();
-	ring.Translate(glm::vec3(0.0f, 0.0f, 2.0f));
+	lightingScene->Init();
 }
 
 void Application::ProcessInput()
@@ -149,6 +133,8 @@ void Application::Update()
 		glm::vec3(0.0f, 0.0f, 0.0f), //look at
 		glm::vec3(0.0f, 1.0f, 0.0f) //up
 	);
+
+	lightingScene->Update(deltaTime);
 }
 
 void Application::Render()
@@ -184,18 +170,25 @@ void Application::DrawGUI()
 
 	ImGui::Begin("Shader Scenes", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollWithMouse);
 
-	const int numScenes = 5;
-	const int buttonHeight = (height / numScenes) - (numScenes * 5.1);
+	const int buttonHeight = 20;
 
-	ImGui::Button("Simple Lighting", ImVec2(-1, buttonHeight));
+	//Lighting Scene
+	ImGui::SeparatorText("Simple Lighting");
+	if (ImGui::Button("Load Scene", ImVec2(-1, buttonHeight)))
+	{
+		//load
+	}
+	ImGui::Text("Simple Lighting Shader with:");
+	ImGui::BulletText("Ambient");
+	ImGui::BulletText("Hemispheric");
+	ImGui::BulletText("Diffuse");
+	ImGui::BulletText("Specular");
+	ImGui::BulletText("Fresnel");
+
 	ImGui::Dummy(ImVec2(0.0, 10.0));
-	ImGui::Button("Scene2", ImVec2(-1, buttonHeight));
-	ImGui::Dummy(ImVec2(0.0, 10.0));
-	ImGui::Button("Scene3", ImVec2(-1, buttonHeight));
-	ImGui::Dummy(ImVec2(0.0, 10.0));
-	ImGui::Button("Scene4", ImVec2(-1, buttonHeight));
-	ImGui::Dummy(ImVec2(0.0, 10.0));
-	ImGui::Button("Scene5", ImVec2(-1, buttonHeight));
+
+	//next
+	//...
 
 	ImGui::End();
 
@@ -207,11 +200,6 @@ void Application::DrawScene()
 	glClearColor(0.1, 0.1, 0.105, 1.1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	monkey.Draw(standardShader, view, projection, camPos);
-	sphere.Draw(standardShader, view, projection, camPos);
-	pyramid.Draw(standardShader, view, projection, camPos);
-	cube.Draw(standardShader, view, projection, camPos);
-	ring.Draw(standardShader, view, projection, camPos);
-
+	lightingScene->Draw(view, projection, camPos);
 }
 

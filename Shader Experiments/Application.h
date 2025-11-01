@@ -8,9 +8,12 @@
 
 #include <SDL.h>
 
+#include <memory>
+
 #include "MeshData.h"
 #include "Shader.h"
 #include "Mesh.h"
+#include "Scenes/LightingScene/LightingScene.h"
 
 class Application
 {
@@ -38,19 +41,14 @@ private:
 
 	float lastFrame;
 
-	Shader standardShader = Shader("Shader/Standard/standardShader.vert", "Shader/Standard/standardShader.frag");
-
-	Mesh pyramid = Mesh("./Models/pyramid.obj");
-	Mesh sphere = Mesh("./Models/sphere.obj");
-	Mesh monkey = Mesh("./Models/monkey.obj");
-	Mesh cube = Mesh("./Models/cube.obj");
-	Mesh ring = Mesh("./Models/ring.obj");
+	//Scenes
+	std::unique_ptr<Scene> lightingScene = std::make_unique<LightingScene>();
 
 	glm::vec3 camPos;
 	glm::mat4 projection = glm::mat4(1.0f);
 	glm::mat4 view = glm::mat4(1.0f);
 
-	float camRadius = 3.5f;
+	float camRadius = 5.0f;
 	float camSpeed = 1.5f;
 
 	float uiWidthPercent = 0.35f;
