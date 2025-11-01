@@ -4,9 +4,9 @@ void LightingScene::Init()
 {
 	lightingShader.Init();
 
-	monkey.Init();
-	monkey.Translate(glm::vec3(0.0f, monkeyPos, 0.0f));
-	meshList.push_back(&monkey);
+	cone.Init();
+	cone.Translate(glm::vec3(0.0f, conePos, 0.0f));
+	meshList.push_back(&cone);
 
 	sphere.Init();
 	sphere.Translate(glm::vec3(0.0f, spherePos, 0.0f));
@@ -27,7 +27,7 @@ void LightingScene::Init()
 
 void LightingScene::Update(float dt)
 {
-	MoveMesh(monkeyPos, monkey, dt);
+	MoveMesh(conePos, cone, dt);
 	MoveMesh(spherePos, sphere, dt);
 	MoveMesh(pyramidPos, pyramid, dt);
 	MoveMesh(cubePos, cube, dt);

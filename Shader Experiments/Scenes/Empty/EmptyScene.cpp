@@ -5,6 +5,7 @@ void EmptyScene::Init()
 	standardShader.Init();
 
 	text.Init();
+	text.Rotate(-120, glm::vec3(0.0, 1.0, 0.0));
 	meshList.push_back(&text);
 }
 

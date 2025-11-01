@@ -18,9 +18,11 @@ public:
 private:
 	Shader noiseShader = Shader("./Shader/Noise/noiseShader.vert", "./Shader/Noise/noiseShader.frag");
 
-	Mesh screen = Mesh(
+	/*Mesh screen = Mesh(
 		std::vector<float>(std::begin(screenVertices), std::end(screenVertices)),
 		{}
-	);
+	);*/
+
+	Mesh monkey = Mesh("./Models/monkey_high.obj");
 };
 

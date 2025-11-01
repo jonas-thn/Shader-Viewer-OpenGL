@@ -184,7 +184,7 @@ void Application::DrawGUI()
 	{
 		activeScene = ActiveScene::Lighting;
 	}
-	ImGui::Text("Simple Lighting Shader with:");
+	ImGui::Text("Lighting Shader with:");
 	ImGui::BulletText("Ambient");
 	ImGui::BulletText("Hemispheric");
 	ImGui::BulletText("Diffuse");
@@ -193,12 +193,13 @@ void Application::DrawGUI()
 
 	ImGui::Dummy(ImVec2(0.0, 10.0));
 
-	ImGui::SeparatorText("Noise Stuff");
+	ImGui::SeparatorText("Noise Dissolve");
 	if (ImGui::Button("Load Scene##2", ImVec2(-1, buttonHeight)))
 	{
 		activeScene = ActiveScene::Noise;
 	}
-	ImGui::Text("Some Noise Stuff");
+	ImGui::Text("Simple Dissolve Shader");
+	ImGui::Text("with Value Noise");
 
 	ImGui::End();
 
@@ -224,6 +225,9 @@ void Application::DrawScene()
 	}
 	else if (activeScene == ActiveScene::Noise)
 	{
+		camRadius = 5.0f;
+		camSpeed = 1.0f;
+		cameraHeight = 0.5f;
 		noiseScene->Draw(view, projection, camPos, (SDL_GetTicks() * 0.001f));
 	}
 }

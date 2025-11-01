@@ -64,7 +64,8 @@ void main()
 	vec3 fresnel = fresnelValue * fresnelColor;
 
 	//final
-	vec3 finalColor = baseColor * ambient + hemi * 0.5 + diffuse + specular + fresnel * 0.2;
+	float saturation = 0.5;
+	vec3 finalColor = (baseColor * ambient) + (hemi * 0.5) + (diffuse * saturation + diffuse * baseColor * saturation) + (specular * 0.5) + (fresnel * 0.2);
 	finalColor = clamp(finalColor, 0.0, 1.0);
 
 	FragColor = vec4(finalColor, 1.0);

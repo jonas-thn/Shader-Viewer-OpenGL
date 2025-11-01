@@ -12,7 +12,7 @@ void main()
 {
 	vec3 baseColor = vec3(0.2);
 
-	vec3 lightDir = normalize(vec3(1.0, 1.0, 1.0));
+	vec3 lightDir = normalize(vec3(-1.0, 1.0, -1.0));
 	float diffuse = max(0.0, dot(lightDir, normalize(Normals)));
 	vec3 finalColor = baseColor + diffuse;
 

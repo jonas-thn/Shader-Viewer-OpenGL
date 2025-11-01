@@ -4,8 +4,11 @@ void NoiseScene::Init()
 {
 	noiseShader.Init();
 
-	screen.Init();
-	meshList.push_back(&screen);
+	/*screen.Init();
+	meshList.push_back(&screen);*/
+
+	monkey.Init();
+	meshList.push_back(&monkey);
 }
 
 void NoiseScene::Update(float dt)
