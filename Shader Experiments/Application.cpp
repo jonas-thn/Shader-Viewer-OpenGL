@@ -92,6 +92,8 @@ void Application::Setup()
 	{
 		scene->Init();
 	}
+
+	emptyScene->active = true;
 }
 
 void Application::ProcessInput()
@@ -183,6 +185,8 @@ void Application::DrawGUI()
 	if (ImGui::Button("Load Scene##1", ImVec2(-1, buttonHeight)))
 	{
 		activeScene = ActiveScene::Lighting;
+		ResetScenes();
+		lightingScene->active = true;
 	}
 	ImGui::Text("Lighting Shader with:");
 	ImGui::BulletText("Ambient");
@@ -193,13 +197,16 @@ void Application::DrawGUI()
 
 	ImGui::Dummy(ImVec2(0.0, 10.0));
 
-	ImGui::SeparatorText("Noise Dissolve");
+	ImGui::SeparatorText("Other");
 	if (ImGui::Button("Load Scene##2", ImVec2(-1, buttonHeight)))
 	{
-		activeScene = ActiveScene::Noise;
+		activeScene = ActiveScene::Other;
+		ResetScenes();
+		otherScene->active = true;
 	}
-	ImGui::Text("Simple Dissolve Shader");
-	ImGui::Text("with Value Noise");
+	ImGui::Text("Other Shaders:");
+	ImGui::BulletText("Value Noise Dissolve");
+	ImGui::BulletText("Ripple Effect");
 
 	ImGui::End();
 
@@ -223,12 +230,20 @@ void Application::DrawScene()
 
 		lightingScene->Draw(view, projection, camPos, (SDL_GetTicks() * 0.001f));
 	}
-	else if (activeScene == ActiveScene::Noise)
+	else if (activeScene == ActiveScene::Other)
 	{
-		camRadius = 5.0f;
-		camSpeed = 1.0f;
+		camRadius = 6.0f;
+		camSpeed = 0.5f;
 		cameraHeight = 0.5f;
-		noiseScene->Draw(view, projection, camPos, (SDL_GetTicks() * 0.001f));
+		otherScene->Draw(view, projection, camPos, (SDL_GetTicks() * 0.001f));
+	}
+}
+
+void Application::ResetScenes()
+{
+	for (std::shared_ptr<Scene> scene : sceneList)
+	{
+		scene->active = false;
 	}
 }
 

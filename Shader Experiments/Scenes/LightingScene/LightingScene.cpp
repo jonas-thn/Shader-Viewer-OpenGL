@@ -27,6 +27,8 @@ void LightingScene::Init()
 
 void LightingScene::Update(float dt)
 {
+	if (!active) return;
+
 	MoveMesh(conePos, cone, dt);
 	MoveMesh(spherePos, sphere, dt);
 	MoveMesh(pyramidPos, pyramid, dt);

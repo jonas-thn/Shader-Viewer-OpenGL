@@ -11,7 +11,7 @@ void EmptyScene::Init()
 
 void EmptyScene::Update(float dt)
 {
-	//...
+	if (!active) return;
 }
 
 void EmptyScene::Draw(glm::mat4& view, glm::mat4& projection, glm::vec3& camPos, float time)

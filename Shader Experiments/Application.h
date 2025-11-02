@@ -14,14 +14,15 @@
 #include "Shader.h"
 #include "Mesh.h"
 #include "Scenes/LightingScene/LightingScene.h"
-#include "Scenes/Empty/EmptyScene.h"
+#include "Scenes/EmptyScene/EmptyScene.h"
 #include "Scenes/NoiseScene/NoiseScene.h"
+#include "Scenes/OtherScene/OtherScene.h"
 
 enum class ActiveScene
 {
 	None,
 	Lighting,
-	Noise
+	Other
 };
 
 class Application
@@ -37,6 +38,7 @@ public:
 private:
 	void DrawGUI();
 	void DrawScene();
+	void ResetScenes();
 
 public:
 	bool running = true;
@@ -54,8 +56,8 @@ private:
 	ActiveScene activeScene = ActiveScene::None;
 	std::shared_ptr<Scene> emptyScene = std::make_shared<EmptyScene>();
 	std::shared_ptr<Scene> lightingScene = std::make_shared<LightingScene>();
-	std::shared_ptr<Scene> noiseScene = std::make_shared<NoiseScene>();
-	std::vector <std::shared_ptr<Scene>> sceneList = {emptyScene, lightingScene, noiseScene};
+	std::shared_ptr<Scene> otherScene = std::make_shared<OtherScene>();
+	std::vector <std::shared_ptr<Scene>> sceneList = {emptyScene, lightingScene, otherScene};
 
 	glm::vec3 camPos;
 	glm::mat4 projection = glm::mat4(1.0f);

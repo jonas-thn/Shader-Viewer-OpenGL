@@ -12,6 +12,7 @@ public:
 	virtual void Init() = 0;
 	virtual void Update(float dt) = 0;
 	virtual void Draw(glm::mat4& view, glm::mat4& projection, glm::vec3& camPos, float time) = 0;
+	bool active = false;
 
 protected:
 	std::vector<Mesh*> meshList;

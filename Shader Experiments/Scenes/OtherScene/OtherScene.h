@@ -5,11 +5,11 @@
 #include "../../Mesh.h"
 #include <vector>
 
-class NoiseScene : public Scene
+class OtherScene : public Scene
 {
 public:
-	NoiseScene() = default;
-	virtual ~NoiseScene() = default;
+	OtherScene() = default;
+	virtual ~OtherScene() = default;
 
 	void Init() override;
 	void Update(float dt) override;
@@ -17,7 +17,8 @@ public:
 
 private:
 	Shader noiseShader = Shader("./Shader/Noise/noiseShader.vert", "./Shader/Noise/noiseShader.frag");
+	Shader rippleShader = Shader("./Shader/Lighting/lightingShader.vert", "./Shader/Lighting/lightingShader.frag");
 
-	Mesh monkey = Mesh("./Models/monkey_high.obj");
+	Mesh sphereNoise = Mesh("./Models/sphere_high.obj");
+	Mesh sphereRipple = Mesh("./Models/sphere_high.obj");
 };
-

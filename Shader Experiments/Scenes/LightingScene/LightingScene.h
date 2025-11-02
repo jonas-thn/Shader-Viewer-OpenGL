@@ -16,7 +16,7 @@ private:
 	Shader lightingShader = Shader("./Shader/Lighting/lightingShader.vert", "./Shader/Lighting/lightingShader.frag");
 
 	Mesh pyramid = Mesh("./Models/pyramid.obj");
-	Mesh sphere = Mesh("./Models/sphere_high.obj");
+	Mesh sphere = Mesh("./Models/sphere.obj");
 	Mesh cone = Mesh("./Models/cone.obj");
 	Mesh cube = Mesh("./Models/cube.obj");
 	Mesh ring = Mesh("./Models/ring.obj");

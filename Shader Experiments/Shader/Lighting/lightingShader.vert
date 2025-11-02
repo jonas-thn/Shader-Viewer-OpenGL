@@ -18,7 +18,7 @@ void main()
 {
     vec3 locPos = aPos;
 
-    if(index == 1)
+    if(index == 999)
     {
         float t = sin(locPos.y * 20.0 + time * 10.0);
         t += 1.0;
