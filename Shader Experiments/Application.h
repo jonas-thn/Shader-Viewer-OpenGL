@@ -17,11 +17,13 @@
 #include "Scenes/EmptyScene/EmptyScene.h"
 #include "Scenes/NoiseScene/NoiseScene.h"
 #include "Scenes/OtherScene/OtherScene.h"
+#include "Scenes/PlanetScene/PlanetScene.h"
 
 enum class ActiveScene
 {
 	None,
 	Lighting,
+	Planet,
 	Other
 };
 
@@ -56,8 +58,9 @@ private:
 	ActiveScene activeScene = ActiveScene::None;
 	std::shared_ptr<Scene> emptyScene = std::make_shared<EmptyScene>();
 	std::shared_ptr<Scene> lightingScene = std::make_shared<LightingScene>();
+	std::shared_ptr<Scene> planetScene = std::make_shared<PlanetScene>();
 	std::shared_ptr<Scene> otherScene = std::make_shared<OtherScene>();
-	std::vector <std::shared_ptr<Scene>> sceneList = {emptyScene, lightingScene, otherScene};
+	std::vector <std::shared_ptr<Scene>> sceneList = {emptyScene, lightingScene, planetScene, otherScene};
 
 	glm::vec3 camPos;
 	glm::mat4 projection = glm::mat4(1.0f);

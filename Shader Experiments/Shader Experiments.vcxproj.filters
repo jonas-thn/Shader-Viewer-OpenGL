@@ -63,6 +63,9 @@
     <ClCompile Include="Scenes\OtherScene\OtherScene.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Scenes\PlanetScene\PlanetScene.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image.h">
@@ -122,6 +125,9 @@
     <ClInclude Include="Scenes\OtherScene\OtherScene.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Scenes\PlanetScene\PlanetScene.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\Standard\standardShader.vert" />
@@ -130,6 +136,8 @@
     <None Include="Shader\Lighting\lightingShader.frag" />
     <None Include="Shader\Noise\noiseShader.vert" />
     <None Include="Shader\Noise\noiseShader.frag" />
+    <None Include="Shader\Planet\planetShader.vert" />
+    <None Include="Shader\Planet\planetShader.frag" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ImGui\LICENSE.txt" />

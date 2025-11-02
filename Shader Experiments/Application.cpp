@@ -181,14 +181,14 @@ void Application::DrawGUI()
 	const int buttonHeight = 20;
 
 	//Lighting Scene
-	ImGui::SeparatorText("Simple Lighting");
+	ImGui::SeparatorText("Lighting");
 	if (ImGui::Button("Load Scene##1", ImVec2(-1, buttonHeight)))
 	{
 		activeScene = ActiveScene::Lighting;
 		ResetScenes();
 		lightingScene->active = true;
 	}
-	ImGui::Text("Lighting Shader with:");
+	ImGui::Text("Lighting Shader:");
 	ImGui::BulletText("Ambient");
 	ImGui::BulletText("Hemispheric");
 	ImGui::BulletText("Diffuse");
@@ -197,15 +197,30 @@ void Application::DrawGUI()
 
 	ImGui::Dummy(ImVec2(0.0, 10.0));
 
-	ImGui::SeparatorText("Other");
+	ImGui::SeparatorText("Planet");
 	if (ImGui::Button("Load Scene##2", ImVec2(-1, buttonHeight)))
+	{
+		activeScene = ActiveScene::Planet;
+		ResetScenes();
+		planetScene->active = true;
+	}
+	ImGui::Text("Planet and Stars Shader:");
+	ImGui::BulletText("SDFs");
+	ImGui::BulletText("Lighting");
+	ImGui::BulletText("Noise");
+	ImGui::BulletText("3D Mapping");
+
+	ImGui::Dummy(ImVec2(0.0, 10.0));
+
+	ImGui::SeparatorText("Other");
+	if (ImGui::Button("Load Scene##3", ImVec2(-1, buttonHeight)))
 	{
 		activeScene = ActiveScene::Other;
 		ResetScenes();
 		otherScene->active = true;
 	}
 	ImGui::Text("Other Shaders:");
-	ImGui::BulletText("Value Noise Dissolve");
+	ImGui::BulletText("Dissolve Effect");
 	ImGui::BulletText("Ripple Effect");
 
 	ImGui::End();
@@ -229,6 +244,10 @@ void Application::DrawScene()
 		cameraHeight = 1.75;
 
 		lightingScene->Draw(view, projection, camPos, (SDL_GetTicks() * 0.001f));
+	}
+	else if (activeScene == ActiveScene::Planet)
+	{
+		planetScene->Draw(view, projection, camPos, (SDL_GetTicks() * 0.001f));
 	}
 	else if (activeScene == ActiveScene::Other)
 	{
