@@ -205,22 +205,25 @@ void Application::DrawGUI()
 		planetScene->active = true;
 	}
 	ImGui::Text("Planet and Stars Shader:");
-	ImGui::BulletText("SDFs");
+	ImGui::BulletText("Signed Distance Functions");
 	ImGui::BulletText("Lighting");
 	ImGui::BulletText("Noise");
 	ImGui::BulletText("3D Mapping");
 
 	ImGui::Dummy(ImVec2(0.0, 10.0));
 
-	ImGui::SeparatorText("Raymcahring");
+	ImGui::SeparatorText("Raymarching");
 	if (ImGui::Button("Load Scene##3", ImVec2(-1, buttonHeight)))
 	{
 		activeScene = ActiveScene::Raymarching;
 		ResetScenes();
 		raymrchingScene->active = true;
 	}
-	ImGui::Text("Raymacrhing Stuff");
-	
+	ImGui::Text("Raymacrhing Shader:");
+	ImGui::BulletText("Smooth Blending");
+	ImGui::BulletText("Distance Fog");
+	ImGui::BulletText("Soft Shadows");
+	ImGui::BulletText("Ambient Occlusion");
 
 	ImGui::Dummy(ImVec2(0.0, 10.0));
 

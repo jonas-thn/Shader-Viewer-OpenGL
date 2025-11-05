@@ -10,6 +10,13 @@ uniform float time;
 
 out vec4 FragColor;
 
+float sminWithBlend(float a, float b, float k, out float blend)
+{
+    float h = clamp(0.5 + 0.5 * (b - a) / k, 0.0, 1.0);
+    blend = h;  
+    return mix(b, a, h) - k * h * (1.0 - h);
+}
+
 float sdfSphere(vec3 p, float r)
 {
 	return length(p) - r;
@@ -41,12 +48,6 @@ mat3 rotateX(float angle)
                 0.0, -s, c);
 }
 
-vec3 RED = vec3(1.0, 0.0, 0.0);
-vec3 BLUE = vec3(0.0, 0.0, 1.0);
-vec3 GREEN = vec3(0.0, 1.0, 0.0);
-vec3 GREY = vec3(0.5);
-vec3 WHITE = vec3(1.0);
-
 struct MaterialData {
 	vec3 color;
 	float dist;
@@ -54,23 +55,31 @@ struct MaterialData {
 
 MaterialData map(vec3 pos)
 {
-//	p = rotateX(time) * p; //nach Offset
-
-	MaterialData result = MaterialData(GREY, sdfPlane(pos - vec3(0.0, -1.0, 0.0)));
+	MaterialData result = MaterialData(vec3(0.2), sdfPlane(pos - vec3(0.0, -1.0, 0.0)));
 	
 	float dist = 0.0;
 
-	dist = sdfBox(pos - vec3(-2.0, -0.0, 5.0), vec3(0.8));
-	result.color = dist < result.dist ? RED : result.color;
-	result.dist = min(result.dist, dist);
+	float blend;
 
-	dist = sdfBox(pos - vec3(2.0, -0.5, 5.0), vec3(0.8));
-	result.color = dist < result.dist ? BLUE : result.color;
-	result.dist = min(result.dist, dist);
+	dist = sdfSphere(pos - vec3(-1.5, 0.5, 5.0), 0.6);
+	result.dist = sminWithBlend(result.dist, dist, 0.5, blend);
+	result.color = mix(vec3(1.0, 0.0, 0.0), result.color, blend);
 
-	dist = sdfBox(pos - vec3(2.0, 1.5, 50 + sin(time) * 25.0), vec3(2.0));
-	result.color = dist < result.dist ? GREEN : result.color;
-	result.dist = min(result.dist, dist);
+	dist = sdfSphere(pos - vec3(-1.5, 0.5 * sin(time) - 0.5, 5.0), 0.5);
+	result.dist = sminWithBlend(result.dist, dist, 0.5, blend);
+	result.color = mix(vec3(0.0, 1.0, 0.0), result.color, blend);
+
+	dist = sdfBox(pos - vec3(2.0, 0.0, 28 + sin(time) * 25.0), vec3(0.8));
+	result.dist = sminWithBlend(result.dist, dist, 0.0, blend);
+	result.color = mix(vec3(0.2, 0.0, 1.0), result.color, blend);
+
+	dist = sdfTorus(rotateX(time) * (pos - vec3(1.2, 2.5, 8.0)), vec2(1.0, 0.2));
+	result.dist = sminWithBlend(result.dist, dist, 0.1, blend);
+	result.color = mix(vec3(0.0, 0.8, 1.0), result.color, blend);
+
+	dist = sdfTorus(rotateX(time + 1.6) * (pos - vec3(0.2, 2.5, 8.0)), vec2(1.0, 0.2));
+	result.dist = sminWithBlend(result.dist, dist, 0.8 * sin(time) + 0.8, blend);
+	result.color = mix(vec3(1.0, 1.0, 0.0), result.color, blend);
 
 	return result;
 }
@@ -96,7 +105,9 @@ vec3 CalculateLighting(vec3 pos, vec3 normal, vec3 lightColor, vec3 lightDir)
 
 float CalculateShadow(vec3 pos, vec3 lightDir)
 {
+	float res = 1.0;
 	float d = 0.01;
+
 	for(int i = 0; i < 64; i++)
 	{
 		float distToScene = map(pos + lightDir * d).dist;
@@ -106,10 +117,12 @@ float CalculateShadow(vec3 pos, vec3 lightDir)
 			return 0.0;
 		}
 
+		res = min(res, 7.0 * distToScene / d);
+
 		d += distToScene;
 	}
 
-	return 1.0;
+	return clamp(res, 0.0, 1.0);
 }
 
 float CalculateAO(vec3 pos, vec3 normal)
@@ -135,7 +148,7 @@ vec3 Raymarch(vec3 cameraOrigin, vec3 cameraDir)
 	vec3 pos;
 	MaterialData material = MaterialData(vec3(0.0), 0.0);
 
-	vec3 skyColor = vec3(0.55, 0.6, 1.0);
+	vec3 skyColor = vec3(0.5, 0.55, 1.0);
 
 	for(int i = 0; i < NUM_STEPS; i++)
 	{
@@ -158,7 +171,7 @@ vec3 Raymarch(vec3 cameraOrigin, vec3 cameraDir)
 	}
 
 	vec3 lightDir = normalize(vec3(1.0, 3.0, -1.0));
-	vec3 lightColor = WHITE;
+	vec3 lightColor = vec3(1.0);
 	vec3 normal = CalculateNormal(pos);
 	float shadows = CalculateShadow(pos, lightDir);
 	vec3 lighting = CalculateLighting(pos, normal, lightColor, lightDir);
@@ -166,7 +179,7 @@ vec3 Raymarch(vec3 cameraOrigin, vec3 cameraDir)
 	float ao = CalculateAO(pos, normal);
 	vec3 color = material.color * lighting * ao;
 
-	float fogFactor = 1.0 - exp(-pos.z * 0.01);
+	float fogFactor = 1.0 - exp(-pos.z * 0.02);
 	color = mix(color, skyColor, fogFactor);
 
 	return color;
@@ -185,5 +198,5 @@ void main()
 	vec3 baseColor = Raymarch(rayOrigin, rayDir);
 
 	FragColor = vec4(baseColor, 1.0);
-    FragColor = pow(FragColor, vec4(1/1.8));
+    FragColor = pow(FragColor, vec4(1/1.5));
 }
