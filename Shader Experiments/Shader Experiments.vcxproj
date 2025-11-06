@@ -136,6 +136,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="MeshInstances.cpp" />
+    <ClCompile Include="Scenes\GrassScene\GrassScene.cpp" />
     <ClCompile Include="Scenes\RaymarchingScene\RaymarchingScene.cpp" />
     <ClCompile Include="Scenes\PlanetScene\PlanetScene.cpp" />
     <ClCompile Include="Scenes\OtherScene\OtherScene.cpp" />
@@ -157,6 +159,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="MeshInstances.h" />
+    <ClInclude Include="Scenes\GrassScene\GrassScene.h" />
     <ClInclude Include="Scenes\RaymarchingScene\RaymarchingScene.h" />
     <ClInclude Include="Scenes\PlanetScene\PlanetScene.h" />
     <ClInclude Include="Scenes\OtherScene\OtherScene.h" />
@@ -180,6 +184,8 @@
     <ClInclude Include="Scenes\TerrainScene\TerrainScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Shader\Grass\grassShader.frag" />
+    <None Include="Shader\Grass\grassShader.vert" />
     <None Include="Shader\Lighting\lightingShader.frag" />
     <None Include="Shader\Lighting\lightingShader.vert" />
     <None Include="Shader\Noise\noiseShader.frag" />

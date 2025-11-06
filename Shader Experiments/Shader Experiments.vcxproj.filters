@@ -72,6 +72,12 @@
     <ClCompile Include="Scenes\TerrainScene\TerrainScene.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Scenes\GrassScene\GrassScene.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshInstances.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image.h">
@@ -140,6 +146,12 @@
     <ClInclude Include="Scenes\TerrainScene\TerrainScene.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Scenes\GrassScene\GrassScene.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshInstances.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\Standard\standardShader.vert" />
@@ -154,6 +166,8 @@
     <None Include="Shader\Raymarching\raymarchShader.frag" />
     <None Include="Shader\Terrain\terrainShader.vert" />
     <None Include="Shader\Terrain\terrainShader.frag" />
+    <None Include="Shader\Grass\grassShader.vert" />
+    <None Include="Shader\Grass\grassShader.frag" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ImGui\LICENSE.txt" />

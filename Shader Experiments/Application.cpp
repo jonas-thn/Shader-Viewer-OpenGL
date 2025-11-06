@@ -93,6 +93,8 @@ void Application::Setup()
 		scene->Init();
 	}
 
+	grassScene->Init();
+
 	emptyScene->active = true;
 }
 
@@ -241,6 +243,16 @@ void Application::DrawGUI()
 
 	ImGui::Dummy(ImVec2(0.0, 10.0));
 
+	ImGui::SeparatorText("Grass");
+	if (ImGui::Button("Load Scene##5", ImVec2(-1, buttonHeight)))
+	{
+		activeScene = ActiveScene::Grass;
+		ResetScenes();
+	}
+	ImGui::Text("Grass Shader:");
+
+	ImGui::Dummy(ImVec2(0.0, 10.0));
+
 	ImGui::SeparatorText("Other");
 	if (ImGui::Button("Load Scene##9", ImVec2(-1, buttonHeight)))
 	{
@@ -285,6 +297,13 @@ void Application::DrawScene()
 	else if (activeScene == ActiveScene::Terrain)
 	{
 		terrainScene->Draw(view, projection, camPos, (SDL_GetTicks() * 0.001f));
+	}
+	else if (activeScene == ActiveScene::Grass)
+	{
+		camRadius = 7.0f;
+		camSpeed = 1.0f;
+		cameraHeight = 1.75;
+		grassScene->Draw(view, projection, camPos, (SDL_GetTicks() * 0.001f));
 	}
 	else if (activeScene == ActiveScene::Other)
 	{
