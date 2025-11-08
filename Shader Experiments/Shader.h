@@ -17,6 +17,9 @@ public:
 	Shader(const std::string& vertexPath, const std::string& fragmentPath, const std::string& geometryPath = "");
 	~Shader();
 
+	Shader(const Shader&) = delete;
+	Shader& operator=(const Shader&) = delete;
+
 	void Init();
 	void Use();
 

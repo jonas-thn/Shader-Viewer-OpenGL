@@ -22,6 +22,7 @@
 #include "Scenes/TerrainScene/TerrainScene.h"
 #include "Scenes/GrassScene/GrassScene.h"
 #include "Scenes/FireworkScene/FireworkScene.h"
+#include "Scenes/WaterScene/WaterScene.h"
 
 enum class ActiveScene
 {
@@ -74,8 +75,9 @@ private:
 	std::shared_ptr<Scene> raymrchingScene = std::make_shared<RaymarchingScene>();
 	std::shared_ptr<Scene> terrainScene = std::make_shared<TerrainScene>();
 	std::shared_ptr<Scene> fireworkScene = std::make_shared<FireworkScene>();
+	std::shared_ptr<Scene> waterScene = std::make_shared<WaterScene>();
 	std::shared_ptr<Scene> otherScene = std::make_shared<OtherScene>();
-	std::vector <std::shared_ptr<Scene>> sceneList = {emptyScene, lightingScene, planetScene, raymrchingScene, terrainScene, fireworkScene, otherScene};
+	std::vector <std::shared_ptr<Scene>> sceneList = {emptyScene, lightingScene, planetScene, raymrchingScene, terrainScene, fireworkScene, waterScene, otherScene};
 
 	std::shared_ptr<GrassScene> grassScene = std::make_shared<GrassScene>();
 

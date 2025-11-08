@@ -261,11 +261,19 @@ void Application::DrawGUI()
 		fireworkScene->active = true;
 	}
 	ImGui::Text("Firework Shader:");
+	ImGui::BulletText("Particles");
+	ImGui::BulletText("Glow");
 
 	ImGui::Dummy(ImVec2(0.0, 10.0));
 
 	ImGui::SeparatorText("Water");
-	ImGui::Text("WORK IN PROGRESS...");
+	if (ImGui::Button("Load Scene##7", ImVec2(-1, buttonHeight)))
+	{
+		activeScene = ActiveScene::Water;
+		ResetScenes();
+		waterScene->active = true;
+	}
+	ImGui::Text("Water Shader:");
 
 	ImGui::Dummy(ImVec2(0.0, 10.0));
 
@@ -324,6 +332,10 @@ void Application::DrawScene()
 	else if (activeScene == ActiveScene::Firework)
 	{
 		fireworkScene->Draw(view, projection, camPos, (SDL_GetTicks() * 0.001f));
+	}
+	else if (activeScene == ActiveScene::Water)
+	{
+		waterScene->Draw(view, projection, camPos, (SDL_GetTicks() * 0.001f));
 	}
 	else if (activeScene == ActiveScene::Grass)
 	{

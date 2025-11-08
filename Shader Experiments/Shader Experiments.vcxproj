@@ -156,6 +156,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="Scenes\TerrainScene\TerrainScene.cpp" />
+    <ClCompile Include="Scenes\WaterScene\WaterScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -182,6 +183,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Scenes\TerrainScene\TerrainScene.h" />
+    <ClInclude Include="Scenes\WaterScene\WaterScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\Firework\fireworkShader.frag" />
@@ -200,6 +202,8 @@
     <None Include="Shader\Standard\standardShader.vert" />
     <None Include="Shader\Terrain\terrainShader.frag" />
     <None Include="Shader\Terrain\terrainShader.vert" />
+    <None Include="Shader\Water\waterShader.frag" />
+    <None Include="Shader\Water\waterShader.vert" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ImGui\LICENSE.txt" />
