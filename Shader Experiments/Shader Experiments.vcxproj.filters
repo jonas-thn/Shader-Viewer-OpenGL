@@ -81,6 +81,9 @@
     <ClCompile Include="Scenes\WaterScene\WaterScene.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Scenes\TunnelScene\TunnelScene.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image.h">
@@ -158,6 +161,9 @@
     <ClInclude Include="Scenes\WaterScene\WaterScene.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Scenes\TunnelScene\TunnelScene.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\Standard\standardShader.vert" />
@@ -178,6 +184,8 @@
     <None Include="Shader\Firework\fireworkShader.frag" />
     <None Include="Shader\Water\waterShader.vert" />
     <None Include="Shader\Water\waterShader.frag" />
+    <None Include="Shader\Tunnel\tunnelShader.vert" />
+    <None Include="Shader\Tunnel\tunnelShader.frag" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ImGui\LICENSE.txt" />

@@ -200,13 +200,16 @@ void Application::DrawGUI()
 	ImGui::Dummy(ImVec2(0.0, 10.0));
 
 	ImGui::SeparatorText("Water");
-	if (ImGui::Button("Load Scene##7", ImVec2(-1, buttonHeight)))
+	if (ImGui::Button("Load Scene##2", ImVec2(-1, buttonHeight)))
 	{
 		activeScene = ActiveScene::Water;
 		ResetScenes();
 		waterScene->active = true;
 	}
 	ImGui::Text("Water Shader:");
+	ImGui::BulletText("Fractal Brownian Motion");
+	ImGui::BulletText("Sun Reflection");
+	ImGui::BulletText("Pseudo-Subsurface-Scattering");
 
 	ImGui::Dummy(ImVec2(0.0, 10.0));
 
@@ -226,19 +229,19 @@ void Application::DrawGUI()
 	ImGui::Dummy(ImVec2(0.0, 10.0));
 
 	ImGui::SeparatorText("Grass");
-	if (ImGui::Button("Load Scene##5", ImVec2(-1, buttonHeight)))
+	if (ImGui::Button("Load Scene##4", ImVec2(-1, buttonHeight)))
 	{
 		activeScene = ActiveScene::Grass;
 		ResetScenes();
 	}
 	ImGui::Text("Grass Shader:");
 	ImGui::BulletText("Instancing");
-	ImGui::BulletText("Bending");
+	ImGui::BulletText("Wind Bending");
 
 	ImGui::Dummy(ImVec2(0.0, 10.0));
 
 	ImGui::SeparatorText("Firework");
-	if (ImGui::Button("Load Scene##6", ImVec2(-1, buttonHeight)))
+	if (ImGui::Button("Load Scene##5", ImVec2(-1, buttonHeight)))
 	{
 		activeScene = ActiveScene::Firework;
 		ResetScenes();
@@ -251,12 +254,18 @@ void Application::DrawGUI()
 	ImGui::Dummy(ImVec2(0.0, 10.0));
 
 	ImGui::SeparatorText("Tunnel");
-	ImGui::Text("WORK IN PROGRESS...");
+	if (ImGui::Button("Load Scene##6", ImVec2(-1, buttonHeight)))
+	{
+		activeScene = ActiveScene::Tunnel;
+		ResetScenes();
+		tunnelScene->active = true;
+	}
+	ImGui::Text("Tunnel Shader:");
 
 	ImGui::Dummy(ImVec2(0.0, 10.0));
 
 	ImGui::SeparatorText("Planet");
-	if (ImGui::Button("Load Scene##2", ImVec2(-1, buttonHeight)))
+	if (ImGui::Button("Load Scene##7", ImVec2(-1, buttonHeight)))
 	{
 		activeScene = ActiveScene::Planet;
 		ResetScenes();
@@ -270,7 +279,7 @@ void Application::DrawGUI()
 	ImGui::Dummy(ImVec2(0.0, 10.0));
 
 	ImGui::SeparatorText("Terrain");
-	if (ImGui::Button("Load Scene##4", ImVec2(-1, buttonHeight)))
+	if (ImGui::Button("Load Scene##8", ImVec2(-1, buttonHeight)))
 	{
 		activeScene = ActiveScene::Terrain;
 		ResetScenes();
@@ -336,6 +345,10 @@ void Application::DrawScene()
 	else if (activeScene == ActiveScene::Water)
 	{
 		waterScene->Draw(view, projection, camPos, (SDL_GetTicks() * 0.001f));
+	}
+	else if (activeScene == ActiveScene::Tunnel)
+	{
+		tunnelScene->Draw(view, projection, camPos, (SDL_GetTicks() * 0.001f));
 	}
 	else if (activeScene == ActiveScene::Grass)
 	{
