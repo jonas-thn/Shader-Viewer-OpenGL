@@ -1,30 +1,40 @@
 #include "GrassScene.h"
-
+#include "../../Application.h" 
 void GrassScene::Init()
 {
-	standardShader.Init();
-	grassShader.Init();
+    standardShader.Init();
+    grassShader.Init();
 
-	plane.Init();
-	plane.Translate(glm::vec3(0.0, -0.5, 0.0));
-	plane.Rotate(90.0f, glm::vec3(1.0, 0.0, 0.0));
-	plane.SetScale(glm::vec3(4.0));
+    plane.Init();
+    plane.Translate(glm::vec3(0.0, -0.5, 0.0));
+    plane.Rotate(90.0f, glm::vec3(1.0, 0.0, 0.0));
+    plane.SetScale(glm::vec3(4.0));
 
-	sphere.Init();
-	sphere.Translate(glm::vec3(1.0, 2.0, -2.0));
-	sphere.SetScale(glm::vec3(0.5));
+    sphere.Init();
+    sphere.Translate(glm::vec3(1.0, 2.0, -2.0));
+    sphere.SetScale(glm::vec3(0.5));
 
-	grass1.Init();
-	grass2.Init();
+    grass1.Init();
+    grass2.Init();
 }
+
+void GrassScene::Update(float dt) {}
 
 void GrassScene::Draw(glm::mat4& view, glm::mat4& projection, glm::vec3& camPos, float time)
 {
-	plane.Draw(standardShader, view, projection, camPos, time, 800, 0);
+    plane.Draw(standardShader, view, projection, camPos, time, 800, 0);
 
-	grass1.Draw(grassShader, view, projection, camPos, time, 0, count);
-	grass2.Draw(grassShader, view, projection, camPos, time, 1, count);
-
-	//sphere.Draw(standardShader, view, projection, camPos, time, 700, 0);
+    grass1.Draw(grassShader, view, projection, camPos, time, 0, count);
+    grass2.Draw(grassShader, view, projection, camPos, time, 1, count);
 }
 
+void GrassScene::OnActivate(Application* app)
+{
+    app->SetCameraConfig(7.0f, 0.3f, 2.0f);
+}
+
+void GrassScene::OnGuiRender()
+{
+    ImGui::BulletText("Instancing");
+    ImGui::BulletText("Wind Bending");
+}

@@ -1,23 +1,30 @@
 #include "EmptyScene.h"
+#include "../../Application.h"
 
 void EmptyScene::Init()
 {
-	standardShader.Init();
+    standardShader.Init();
 
-	text.Init();
-	text.Rotate(-120, glm::vec3(0.0, 1.0, 0.0));
-	meshList.push_back(&text);
+    text.Init();
+    text.Rotate(-120, glm::vec3(0.0, 1.0, 0.0));
+    meshList.push_back(&text);
 }
 
-void EmptyScene::Update(float dt)
-{
-	if (!active) return;
-}
+void EmptyScene::Update(float dt) {}
 
 void EmptyScene::Draw(glm::mat4& view, glm::mat4& projection, glm::vec3& camPos, float time)
 {
-	for (int i = 0; i < meshList.size(); i++)
-	{
-		meshList[i]->Draw(standardShader, view, projection, camPos, time, i, 0);
-	}
+    for (int i = 0; i < meshList.size(); i++)
+    {
+        meshList[i]->Draw(standardShader, view, projection, camPos, time, i, 0);
+    }
+}
+
+void EmptyScene::OnActivate(Application* app)
+{
+    app->SetCameraConfig(2.5f, 1.0f, 0.0f);
+}
+
+void EmptyScene::OnGuiRender()
+{
 }

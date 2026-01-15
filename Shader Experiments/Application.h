@@ -3,100 +3,69 @@
 #include <gl/glew.h>
 
 #include "ImGui/imgui.h"
-#include "ImGui/imgui_impl_sdl2.h"
-#include "ImGui/imgui_impl_opengl3.h"
 
 #include <SDL.h>
-
 #include <memory>
+#include <vector>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
-#include "MeshData.h"
-#include "Shader.h"
-#include "Mesh.h"
-#include "Scenes/LightingScene/LightingScene.h"
-#include "Scenes/EmptyScene/EmptyScene.h"
-#include "Scenes/NoiseScene/NoiseScene.h"
-#include "Scenes/OtherScene/OtherScene.h"
-#include "Scenes/PlanetScene/PlanetScene.h"
-#include "Scenes/RaymarchingScene/RaymarchingScene.h"
-#include "Scenes/TerrainScene/TerrainScene.h"
-#include "Scenes/GrassScene/GrassScene.h"
-#include "Scenes/FireworkScene/FireworkScene.h"
-#include "Scenes/WaterScene/WaterScene.h"
-#include "Scenes/TunnelScene/TunnelScene.h"
+//TDOD:
+// GLWindow
+// Camera Interface
+// UI Cleanup
+// getter / setter
+// const correctness
+// smart pointers 
+// Init vs Constructor
+// error handling / exceptions
 
-enum class ActiveScene
-{
-	None,
-	Lighting,
-	Planet,
-	Other,
-	Raymarching,
-	Terrain,
-	Grass,
-	Firework,
-	Water,
-	Tunnel
-};
+class Scene;
 
 class Application
 {
 public:
-	void Init();
-	void Setup();
-	void ProcessInput();
-	void Update();
-	void Render();
-	void Destroy();
+    ~Application();
 
-private:
-	void DrawGUI();
-	void DrawScene();
-	void ResetScenes();
+    void Init();
+    void Setup();
+    void ProcessInput();
+    void Update();
+    void Render();
+    void Destroy();
+
+    void SetCameraConfig(float radius, float speed, float height);
 
 public:
-	bool running = true;
+    bool running = true;
 
 private:
-	SDL_Window* window;
-	SDL_GLContext glContext;
+    void DrawGUI();
+    void DrawScene();
 
-	int width = 800;
-	int height = 600;
+    void InitImGuiStyle();
 
-	float lastFrame;
+private:
+    SDL_Window* window = nullptr;
+    SDL_GLContext glContext;
 
-	//Scenes
-	ActiveScene activeScene = ActiveScene::None;
-	std::shared_ptr<Scene> emptyScene = std::make_shared<EmptyScene>();
-	std::shared_ptr<Scene> lightingScene = std::make_shared<LightingScene>();
-	std::shared_ptr<Scene> planetScene = std::make_shared<PlanetScene>();
-	std::shared_ptr<Scene> raymrchingScene = std::make_shared<RaymarchingScene>();
-	std::shared_ptr<Scene> terrainScene = std::make_shared<TerrainScene>();
-	std::shared_ptr<Scene> fireworkScene = std::make_shared<FireworkScene>();
-	std::shared_ptr<Scene> waterScene = std::make_shared<WaterScene>();
-	std::shared_ptr<Scene> tunnelScene = std::make_shared<TunnelScene>();
-	std::shared_ptr<Scene> otherScene = std::make_shared<OtherScene>();
-	std::vector <std::shared_ptr<Scene>> sceneList = {emptyScene, lightingScene, planetScene, raymrchingScene,
-		terrainScene, fireworkScene, waterScene, tunnelScene, otherScene};
+    int width = 800;
+    int height = 600;
 
-	std::shared_ptr<GrassScene> grassScene = std::make_shared<GrassScene>();
+    float lastFrame = 0.0f;
 
-	glm::vec3 camPos;
-	glm::mat4 projection = glm::mat4(1.0f);
-	glm::mat4 view = glm::mat4(1.0f);
+    Scene* activeScene = nullptr;
 
-	float camRadius = 2.5f;
-	float camSpeed = 1.0f;
-	float cameraHeight = 0.0f;
+    std::vector<std::shared_ptr<Scene>> sceneList;
 
-	float uiWidthPercent = 0.35f;
-	int uiWidth = width * uiWidthPercent;
-	ImVec4 blackColor = ImVec4(0.0f, 0.0f, 0.0f, 1.0f);
-	ImVec4 grey02Color = ImVec4(0.2f, 0.2f, 0.2f, 1.0f);
-	ImVec4 grey04Color = ImVec4(0.4f, 0.4f, 0.4f, 1.0f);
-	ImVec4 grey06Color = ImVec4(0.6f, 0.6f, 0.6f, 1.0f);
-	ImVec4 grey08Color = ImVec4(0.8f, 0.8f, 0.8f, 1.0f);
-	ImVec4 whiteColor = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
+    glm::vec3 camPos;
+    glm::mat4 projection = glm::mat4(1.0f);
+    glm::mat4 view = glm::mat4(1.0f);
+
+    float camRadius = 2.5f;
+    float camSpeed = 1.0f;
+    float cameraHeight = 0.0f;
+
+    float uiWidthPercent = 0.35f;
+    int uiWidth = 0;
 };
-

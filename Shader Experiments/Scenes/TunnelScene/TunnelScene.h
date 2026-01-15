@@ -4,21 +4,27 @@
 #include "../../MeshData.h"
 #include <vector>
 
+class Application;
+
 class TunnelScene : public Scene
 {
 public:
-	TunnelScene() = default;
-	virtual ~TunnelScene() = default;
+    TunnelScene() = default;
+    virtual ~TunnelScene() = default;
 
-	void Init() override;
-	void Update(float dt) override;
-	void Draw(glm::mat4& view, glm::mat4& projection, glm::vec3& camPos, float time) override;
+    void Init() override;
+    void Update(float dt) override;
+    void Draw(glm::mat4& view, glm::mat4& projection, glm::vec3& camPos, float time) override;
+
+    std::string GetName() const override { return "Tunnel"; }
+    void OnActivate(Application* app) override;
+    void OnGuiRender() override;
 
 private:
-	Shader glassShder = Shader("./Shader/Tunnel/tunnelShader.vert", "./Shader/Tunnel/tunnelShader.frag");
+    Shader tunnelShder = Shader("./Shader/Tunnel/tunnelShader.vert", "./Shader/Tunnel/tunnelShader.frag");
 
-	Mesh screen = Mesh(
-		std::vector<float>(std::begin(screenVertices), std::end(screenVertices)),
-		{}
-	);
+    Mesh screen = Mesh(
+        std::vector<float>(std::begin(screenVertices), std::end(screenVertices)),
+        {}
+    );
 };

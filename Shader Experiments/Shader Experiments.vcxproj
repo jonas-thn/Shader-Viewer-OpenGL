@@ -136,13 +136,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="GLWindow.cpp" />
     <ClCompile Include="Scenes\TunnelScene\TunnelScene.cpp" />
     <ClCompile Include="Scenes\FireworkScene\FireworkScene.cpp" />
     <ClCompile Include="Scenes\GrassScene\GrassScene.cpp" />
     <ClCompile Include="Scenes\RaymarchingScene\RaymarchingScene.cpp" />
     <ClCompile Include="Scenes\PlanetScene\PlanetScene.cpp" />
     <ClCompile Include="Scenes\OtherScene\OtherScene.cpp" />
-    <ClCompile Include="Scenes\NoiseScene\NoiseScene.cpp" />
     <ClCompile Include="Scenes\EmptyScene\EmptyScene.cpp" />
     <ClCompile Include="ImGui\imgui.cpp" />
     <ClCompile Include="ImGui\imgui_demo.cpp" />
@@ -161,13 +161,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="GLWindow.h" />
     <ClInclude Include="Scenes\TunnelScene\TunnelScene.h" />
     <ClInclude Include="Scenes\FireworkScene\FireworkScene.h" />
     <ClInclude Include="Scenes\GrassScene\GrassScene.h" />
     <ClInclude Include="Scenes\RaymarchingScene\RaymarchingScene.h" />
     <ClInclude Include="Scenes\PlanetScene\PlanetScene.h" />
     <ClInclude Include="Scenes\OtherScene\OtherScene.h" />
-    <ClInclude Include="Scenes\NoiseScene\NoiseScene.h" />
     <ClInclude Include="Scenes\EmptyScene\EmptyScene.h" />
     <ClInclude Include="ImGui\imconfig.h" />
     <ClInclude Include="ImGui\imgui.h" />
