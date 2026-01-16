@@ -5,6 +5,7 @@
 #include <glm/glm.hpp> 
 #include "../Shader.h"
 #include "../Mesh.h"
+#include "../ICameraControl.h"
 
 class Application;
 
@@ -22,7 +23,7 @@ public:
 
     virtual void OnGuiRender() {}
 
-    virtual void OnActivate(Application* app) {}
+    virtual void OnActivate(ICameraControl* cameraControl) {}
 
 protected:
     std::vector<Mesh*> meshList;

@@ -28,9 +28,9 @@ void GrassScene::Draw(glm::mat4& view, glm::mat4& projection, glm::vec3& camPos,
     grass2.Draw(grassShader, view, projection, camPos, time, 1, count);
 }
 
-void GrassScene::OnActivate(Application* app)
+void GrassScene::OnActivate(ICameraControl* cameraControl)
 {
-    app->SetCameraConfig(7.0f, 0.3f, 2.0f);
+    cameraControl->SetCameraConfig(7.0f, 0.3f, 2.0f);
 }
 
 void GrassScene::OnGuiRender()

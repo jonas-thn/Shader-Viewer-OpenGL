@@ -11,21 +11,20 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "GLWindow.h"
+#include "ICameraControl.h"
 
 //TDOD:
-// GLWindow
-// Camera Interface
 // UI Cleanup
 // getter / setter
 // const correctness
 // smart pointers 
 // Init vs Constructor
 // error handling / exceptions
-// 
+// shader editor
 
 class Scene;
 
-class Application
+class Application : public ICameraControl
 {
 public:
     ~Application();
@@ -36,7 +35,7 @@ public:
     void Update();
     void Render();
 
-    void SetCameraConfig(float radius, float speed, float height);
+    void SetCameraConfig(float radius, float speed, float height) override;
 
 public:
     bool running = true;

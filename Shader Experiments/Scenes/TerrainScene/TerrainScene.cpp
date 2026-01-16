@@ -19,9 +19,9 @@ void TerrainScene::Draw(glm::mat4& view, glm::mat4& projection, glm::vec3& camPo
     }
 }
 
-void TerrainScene::OnActivate(Application* app)
+void TerrainScene::OnActivate(ICameraControl* cameraControl)
 {
-    app->SetCameraConfig(2.5f, 1.0f, 0.0f);
+    cameraControl->SetCameraConfig(2.5f, 1.0f, 0.0f);
 }
 
 void TerrainScene::OnGuiRender()

@@ -36,9 +36,9 @@ void OtherScene::Draw(glm::mat4& view, glm::mat4& projection, glm::vec3& camPos,
     monkeySphere.Draw(rippleShader, view, projection, camPos, time, 997, 0);
 }
 
-void OtherScene::OnActivate(Application* app)
+void OtherScene::OnActivate(ICameraControl* cameraControl)
 {
-    app->SetCameraConfig(6.0f, 0.2f, 0.5f);
+    cameraControl->SetCameraConfig(6.0f, 0.2f, 0.5f);
 }
 
 void OtherScene::OnGuiRender()

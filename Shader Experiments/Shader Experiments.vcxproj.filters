@@ -164,6 +164,9 @@
     <ClInclude Include="GLWindow.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="ICameraControl.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\Standard\standardShader.vert" />

@@ -162,6 +162,7 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="GLWindow.h" />
+    <ClInclude Include="ICameraControl.h" />
     <ClInclude Include="Scenes\TunnelScene\TunnelScene.h" />
     <ClInclude Include="Scenes\FireworkScene\FireworkScene.h" />
     <ClInclude Include="Scenes\GrassScene\GrassScene.h" />

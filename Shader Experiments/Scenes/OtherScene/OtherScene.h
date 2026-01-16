@@ -18,7 +18,7 @@ public:
     void Draw(glm::mat4& view, glm::mat4& projection, glm::vec3& camPos, float time) override;
 
     std::string GetName() const override { return "Other"; }
-    void OnActivate(Application* app) override;
+    void OnActivate(ICameraControl* cameraControl) override;
     void OnGuiRender() override;
 
 private:
