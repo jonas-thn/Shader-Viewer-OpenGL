@@ -17,7 +17,5 @@ int main(int argc, char** argv)
 		app.Render();
 	}
 
-	app.Destroy();
-
 	return 0;
 }

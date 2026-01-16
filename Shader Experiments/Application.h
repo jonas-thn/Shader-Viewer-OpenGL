@@ -10,6 +10,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "GLWindow.h"
+
 //TDOD:
 // GLWindow
 // Camera Interface
@@ -19,6 +21,7 @@
 // smart pointers 
 // Init vs Constructor
 // error handling / exceptions
+// 
 
 class Scene;
 
@@ -32,7 +35,6 @@ public:
     void ProcessInput();
     void Update();
     void Render();
-    void Destroy();
 
     void SetCameraConfig(float radius, float speed, float height);
 
@@ -46,8 +48,7 @@ private:
     void InitImGuiStyle();
 
 private:
-    SDL_Window* window = nullptr;
-    SDL_GLContext glContext;
+	std::unique_ptr<GLWindow> window;
 
     int width = 800;
     int height = 600;
@@ -55,7 +56,6 @@ private:
     float lastFrame = 0.0f;
 
     Scene* activeScene = nullptr;
-
     std::vector<std::shared_ptr<Scene>> sceneList;
 
     glm::vec3 camPos;

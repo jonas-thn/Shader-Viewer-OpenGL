@@ -5,13 +5,13 @@ public:
     GLWindow(const char* title, int width, int height);
     ~GLWindow();
 
-    SDL_Window* window() const { return m_window; }
-    SDL_GLContext context() const { return m_context; }
+    SDL_Window* GetWindow() const { return window; }
+    SDL_GLContext GetContext() const { return context; }
 
     void SwapBuffers() const;
     void SetVSync(bool enabled) const;
 
 private:
-    SDL_Window* m_window = nullptr;
-    SDL_GLContext m_context = nullptr;
+    SDL_Window* window = nullptr;
+    SDL_GLContext context = nullptr;
 };

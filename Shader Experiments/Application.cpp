@@ -16,26 +16,20 @@
 #include "Scenes/WaterScene/WaterScene.h"
 #include "Scenes/TunnelScene/TunnelScene.h"
 
-Application::~Application() {}
-
 void Application::Init()
 {
-    SDL_Init(SDL_INIT_EVERYTHING);
+    try 
+    {
+        window = std::make_unique<GLWindow>("OpenGL Shader Editor", width, height);
 
-    SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
-    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
-    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
-    SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
-    SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
-
-    window = SDL_CreateWindow("Shader Experiments", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
-
-    glContext = SDL_GL_CreateContext(window);
+        window->SetVSync(true);
+    }
+    catch (const std::exception& e) 
+    {
+        fprintf(stderr, "Init failed: %s\n", e.what());
+        running = false;
+        return;
+    }
 
     glewExperimental = GL_TRUE;
     GLenum err = glewInit();
@@ -52,7 +46,7 @@ void Application::Init()
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
 
-    ImGui_ImplSDL2_InitForOpenGL(window, glContext);
+    ImGui_ImplSDL2_InitForOpenGL(window->GetWindow(), window->GetContext());
     ImGui_ImplOpenGL3_Init("#version 130");
 
     InitImGuiStyle();
@@ -149,18 +143,7 @@ void Application::Render()
     DrawScene();
 
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-    SDL_GL_SwapWindow(window);
-}
-
-void Application::Destroy()
-{
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui_ImplSDL2_Shutdown();
-    ImGui::DestroyContext();
-
-    SDL_GL_DeleteContext(glContext);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
+    window->SwapBuffers();
 }
 
 void Application::DrawGUI()
@@ -269,4 +252,11 @@ void Application::InitImGuiStyle()
     style.Colors[ImGuiCol_NavWindowingDimBg] = ImVec4(0, 0, 0, 0.4f);
     style.Colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0, 0, 0, 0.4f);
     style.WindowPadding = ImVec2(20.0f, 20.0f);
+}
+
+Application::~Application() 
+{
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplSDL2_Shutdown();
+    ImGui::DestroyContext();
 }
