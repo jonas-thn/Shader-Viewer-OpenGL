@@ -16,20 +16,10 @@
 #include "Scenes/WaterScene/WaterScene.h"
 #include "Scenes/TunnelScene/TunnelScene.h"
 
-void Application::Init()
+Application::Application()
 {
-    try 
-    {
-        window = std::make_unique<GLWindow>("OpenGL Shader Editor", width, height);
-
-        window->SetVSync(true);
-    }
-    catch (const std::exception& e) 
-    {
-        fprintf(stderr, "Init failed: %s\n", e.what());
-        running = false;
-        return;
-    }
+    window = std::make_unique<GLWindow>("OpenGL Shader Editor", width, height);
+    window->SetVSync(true);
 
     glewExperimental = GL_TRUE;
     GLenum err = glewInit();
@@ -56,6 +46,13 @@ void Application::Init()
     glViewport(-uiWidth, 0, width + uiWidth, height);
 }
 
+Application::~Application()
+{
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplSDL2_Shutdown();
+    ImGui::DestroyContext();
+}
+
 void Application::Setup()
 {
     projection = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 100.0f);
@@ -71,11 +68,6 @@ void Application::Setup()
     sceneList.push_back(std::make_shared<PlanetScene>());
     sceneList.push_back(std::make_shared<TerrainScene>());
     sceneList.push_back(std::make_shared<OtherScene>());
-
-    for (auto& scene : sceneList)
-    {
-        scene->Init();
-    }
 
     if (!sceneList.empty())
     {
@@ -252,11 +244,4 @@ void Application::InitImGuiStyle()
     style.Colors[ImGuiCol_NavWindowingDimBg] = ImVec4(0, 0, 0, 0.4f);
     style.Colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0, 0, 0, 0.4f);
     style.WindowPadding = ImVec2(20.0f, 20.0f);
-}
-
-Application::~Application() 
-{
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui_ImplSDL2_Shutdown();
-    ImGui::DestroyContext();
 }

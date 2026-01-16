@@ -1,50 +1,60 @@
 #pragma once
 
 #include <vector>
-#include "Shader.h"
+#include <string>
+#include <iostream>
+
+#include <GL/glew.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <glm/gtx/matrix_decompose.hpp>
-#include <glm/gtx/transform.hpp>
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
+#include "Shader.h"
+
 class Mesh
 {
 public:
-	Mesh(const std::string& path) : path(path) {}
-	Mesh(const std::vector<float>& vertices, const std::vector<unsigned int>& indices) : vertices(vertices), indices(indices) {}
+    Mesh(const std::string& path);
+    Mesh(const std::vector<float>& vertices, const std::vector<unsigned int>& indices);
 
-	~Mesh();
-	void Init();
+    ~Mesh();
 
-	void Translate(glm::vec3 pos);
-	void SetPos(glm::vec3 pos);
-	void Rotate(float angle, const glm::vec3& axis);
-	void RotateWorld(float dx, float dy, float sensitivity);
-	void ResetScale();
-	void SetScale(glm::vec3 scale);
+    Mesh(const Mesh&) = delete;
+    Mesh& operator=(const Mesh&) = delete;
 
-	std::vector<float>& GetVertices() { return vertices; }
-	std::vector<unsigned int>& GetIndices() { return indices; }
+    Mesh(Mesh&& other) noexcept;
+    Mesh& operator=(Mesh&& other) noexcept;
 
-	void Draw(Shader& shader, glm::mat4& view, glm::mat4& projection, glm::vec3& camPos, float time, int index, int count) const;
+    void Translate(glm::vec3 pos);
+    void SetPos(glm::vec3 pos);
+    void Rotate(float angle, const glm::vec3& axis);
+    void RotateWorld(float dx, float dy, float sensitivity);
+    void ResetScale();
+    void SetScale(glm::vec3 scale);
+
+    std::vector<float>& GetVertices() { return vertices; }
+    std::vector<unsigned int>& GetIndices() { return indices; }
+
+    void Draw(Shader& shader, const glm::mat4& view, const glm::mat4& projection, const glm::vec3& camPos, float time, int index, int count) const;
 
 private:
-	void LoadMesh();
-	void ProcessNode(aiNode* node, const aiScene* scene);
-	void ProcessMesh(aiMesh* mesh, const aiScene* scene);
+    void LoadMesh();
+    void ProcessNode(aiNode* node, const aiScene* scene);
+    void ProcessMesh(aiMesh* mesh, const aiScene* scene);
 
-	std::vector<float> vertices;
-	std::vector<unsigned int> indices;
-	unsigned int VBO;
-	unsigned int VAO;
-	unsigned int EBO;
-	std::string path = "";
+    void SetupMesh();
 
-	glm::mat4 model = glm::mat4(1.0f);
+    std::vector<float> vertices;
+    std::vector<unsigned int> indices;
+
+    unsigned int VBO = 0;
+    unsigned int VAO = 0;
+    unsigned int EBO = 0;
+
+    std::string path = "";
+    glm::mat4 model = glm::mat4(1.0f);
 };

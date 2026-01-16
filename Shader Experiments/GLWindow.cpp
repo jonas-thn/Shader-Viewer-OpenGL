@@ -1,12 +1,11 @@
 #include "GLWindow.h"
-#include <stdexcept>
+#include <cstdio>
 
 GLWindow::GLWindow(const char* title, int width, int height)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
         fprintf(stderr, "SDL Init Error: %s\n", SDL_GetError());
-        throw std::runtime_error("Failed to create SDL Window");
     }
 
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
@@ -25,7 +24,6 @@ GLWindow::GLWindow(const char* title, int width, int height)
     if (!window)
     {
         fprintf(stderr, "SDL Create Window Error: %s\n", SDL_GetError());
-		throw std::runtime_error("Failed to create SDL Window");
     }
 
     context = SDL_GL_CreateContext(window);
@@ -33,7 +31,6 @@ GLWindow::GLWindow(const char* title, int width, int height)
     if (!context)
     {
         fprintf(stderr, "SDL Create GL Context Error: %s\n", SDL_GetError());
-        throw std::runtime_error("Failed to create OpenGL context");
     }
 
     SDL_GL_MakeCurrent(window, context);

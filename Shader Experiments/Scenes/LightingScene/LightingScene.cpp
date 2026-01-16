@@ -1,27 +1,26 @@
 #include "LightingScene.h"
 #include "../../Application.h" 
 
-void LightingScene::Init()
+LightingScene::LightingScene() : 
+    lightingShader("./Shader/Lighting/lightingShader.vert", "./Shader/Lighting/lightingShader.frag"),
+    pyramid("./Models/pyramid.obj"),
+    sphere("./Models/sphere.obj"),
+    cone("./Models/cone.obj"),
+    cube("./Models/cube.obj"),
+    ring("./Models/ring.obj")
 {
-    lightingShader.Init();
-
-    cone.Init();
     cone.Translate(glm::vec3(0.0f, conePos, 0.0f));
     meshList.push_back(&cone);
 
-    sphere.Init();
     sphere.Translate(glm::vec3(0.0f, spherePos, 0.0f));
     meshList.push_back(&sphere);
 
-    pyramid.Init();
     pyramid.Translate(glm::vec3(0.0f, pyramidPos, 0.0f));
     meshList.push_back(&pyramid);
 
-    cube.Init();
     cube.Translate(glm::vec3(0.0f, cubePos, 0.0f));
     meshList.push_back(&cube);
 
-    ring.Init();
     ring.Translate(glm::vec3(0.0f, ringPos, 0.0f));
     meshList.push_back(&ring);
 }
@@ -35,7 +34,7 @@ void LightingScene::Update(float dt)
     MoveMesh(ringPos, ring, dt);
 }
 
-void LightingScene::Draw(glm::mat4& view, glm::mat4& projection, glm::vec3& camPos, float time)
+void LightingScene::Draw(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& camPos, float time)
 {
     for (int i = 0; i < meshList.size(); i++)
     {

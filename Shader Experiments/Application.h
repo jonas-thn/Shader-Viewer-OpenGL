@@ -13,23 +13,14 @@
 #include "GLWindow.h"
 #include "ICameraControl.h"
 
-//TDOD:
-// UI Cleanup
-// getter / setter
-// const correctness
-// smart pointers 
-// Init vs Constructor
-// error handling / exceptions
-// shader editor
-
 class Scene;
 
 class Application : public ICameraControl
 {
 public:
+    Application();
     ~Application();
 
-    void Init();
     void Setup();
     void ProcessInput();
     void Update();

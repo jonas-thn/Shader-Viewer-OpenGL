@@ -9,22 +9,18 @@ class Application;
 class TerrainScene : public Scene
 {
 public:
-    TerrainScene() = default;
+    TerrainScene();
     virtual ~TerrainScene() = default;
 
-    void Init() override;
     void Update(float dt) override;
-    void Draw(glm::mat4& view, glm::mat4& projection, glm::vec3& camPos, float time) override;
+    void Draw(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& camPos, float time) override;
 
     std::string GetName() const override { return "Terrain"; }
     void OnActivate(ICameraControl* cameraControl) override;
     void OnGuiRender() override;
 
 private:
-    Shader terrainShader = Shader("./Shader/Terrain/terrainShader.vert", "./Shader/Terrain/terrainShader.frag");
+    Shader terrainShader;
 
-    Mesh screen = Mesh(
-        std::vector<float>(std::begin(screenVertices), std::end(screenVertices)),
-        {}
-    );
+    Mesh screen;
 };

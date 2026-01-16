@@ -1,25 +1,24 @@
 #include "OtherScene.h"
 #include "../../Application.h" 
 
-void OtherScene::Init()
+OtherScene::OtherScene() :
+    noiseShader("./Shader/Noise/noiseShader.vert", "./Shader/Noise/noiseShader.frag"),
+    rippleShader("./Shader/Lighting/lightingShader.vert", "./Shader/Lighting/lightingShader.frag"),
+    sphereNoise("./Models/sphere_high.obj"),
+    sphereRipple("./Models/sphere_high.obj"),
+    monkeyExplode("./Models/monkey_high.obj"),
+    monkeySphere("./Models/monkey_high.obj")
 {
-    noiseShader.Init();
-    rippleShader.Init();
-
-    sphereNoise.Init();
     sphereNoise.Translate(glm::vec3(1.5, 0.0, 0.0));
     meshList.push_back(&sphereNoise);
 
-    sphereRipple.Init();
     sphereRipple.Translate(glm::vec3(-1.5, 0.0, 0.0));
     meshList.push_back(&sphereRipple);
 
-    monkeyExplode.Init();
     monkeyExplode.Translate(glm::vec3(0.0, 0.0, 1.5));
     monkeyExplode.SetScale(glm::vec3(0.6));
     meshList.push_back(&monkeyExplode);
 
-    monkeySphere.Init();
     monkeySphere.Translate(glm::vec3(0.0, 0.0, -1.5));
     monkeySphere.Rotate(180, glm::vec3(0.0, 1.0, 0.0));
     monkeySphere.SetScale(glm::vec3(0.6));
@@ -28,7 +27,7 @@ void OtherScene::Init()
 
 void OtherScene::Update(float dt) {}
 
-void OtherScene::Draw(glm::mat4& view, glm::mat4& projection, glm::vec3& camPos, float time)
+void OtherScene::Draw(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& camPos, float time)
 {
     sphereNoise.Draw(noiseShader, view, projection, camPos, time, 0, 0);
     sphereRipple.Draw(rippleShader, view, projection, camPos, time, 999, 0);

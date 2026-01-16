@@ -9,22 +9,17 @@ class Application;
 class FireworkScene : public Scene
 {
 public:
-    FireworkScene() = default;
+    FireworkScene();
     virtual ~FireworkScene() = default;
 
-    void Init() override;
     void Update(float dt) override;
-    void Draw(glm::mat4& view, glm::mat4& projection, glm::vec3& camPos, float time) override;
+    void Draw(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& camPos, float time) override;
 
     std::string GetName() const override { return "Firework"; }
     void OnActivate(ICameraControl* cameraControl) override;
     void OnGuiRender() override;
 
 private:
-    Shader fireworkShader = Shader("./Shader/Firework/fireworkShader.vert", "./Shader/Firework/fireworkShader.frag");
-
-    Mesh screen = Mesh(
-        std::vector<float>(std::begin(screenVertices), std::end(screenVertices)),
-        {}
-    );
+    Shader fireworkShader;
+    Mesh screen;
 };

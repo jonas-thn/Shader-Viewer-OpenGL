@@ -7,25 +7,24 @@ class Application;
 class LightingScene : public Scene
 {
 public:
-    LightingScene() = default;
+    LightingScene();
     virtual ~LightingScene() = default;
 
-    void Init() override;
     void Update(float dt) override;
-    void Draw(glm::mat4& view, glm::mat4& projection, glm::vec3& camPos, float time) override;
+    void Draw(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& camPos, float time) override;
 
     std::string GetName() const override { return "Lighting"; }
     void OnActivate(ICameraControl* cameraControl) override;
     void OnGuiRender() override;
 
 private:
-    Shader lightingShader = Shader("./Shader/Lighting/lightingShader.vert", "./Shader/Lighting/lightingShader.frag");
+    Shader lightingShader;
 
-    Mesh pyramid = Mesh("./Models/pyramid.obj");
-    Mesh sphere = Mesh("./Models/sphere.obj");
-    Mesh cone = Mesh("./Models/cone.obj");
-    Mesh cube = Mesh("./Models/cube.obj");
-    Mesh ring = Mesh("./Models/ring.obj");
+    Mesh pyramid;
+    Mesh sphere;
+    Mesh cone;
+    Mesh cube;
+    Mesh ring;
 
     float speed = 2.0f;
 

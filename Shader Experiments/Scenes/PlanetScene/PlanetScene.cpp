@@ -1,19 +1,16 @@
 #include "PlanetScene.h"
 #include "../../Application.h" 
 
-void PlanetScene::Init()
+PlanetScene::PlanetScene() :
+    planetShader("./Shader/Planet/planetShader.vert", "./Shader/Planet/planetShader.frag"),
+    screen(std::vector<float>(std::begin(screenVertices), std::end(screenVertices)), {})
 {
-    planetShader.Init();
-
-    screen.Init();
     meshList.push_back(&screen);
 }
 
-void PlanetScene::Update(float dt)
-{
-}
+void PlanetScene::Update(float dt) {}
 
-void PlanetScene::Draw(glm::mat4& view, glm::mat4& projection, glm::vec3& camPos, float time)
+void PlanetScene::Draw(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& camPos, float time)
 {
     for (int i = 0; i < meshList.size(); i++)
     {

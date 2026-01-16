@@ -1,17 +1,16 @@
 #include "RaymarchingScene.h"
 #include "../../Application.h" 
 
-void RaymarchingScene::Init()
+RaymarchingScene::RaymarchingScene() :
+    raymarchShader("./Shader/Raymarching/raymarchShader.vert", "./Shader/Raymarching/raymarchShader.frag"),
+    screen(std::vector<float>(std::begin(screenVertices), std::end(screenVertices)),{})
 {
-    raymarchShader.Init();
-
-    screen.Init();
     meshList.push_back(&screen);
 }
 
 void RaymarchingScene::Update(float dt) {}
 
-void RaymarchingScene::Draw(glm::mat4& view, glm::mat4& projection, glm::vec3& camPos, float time)
+void RaymarchingScene::Draw(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& camPos, float time)
 {
     for (int i = 0; i < meshList.size(); i++)
     {

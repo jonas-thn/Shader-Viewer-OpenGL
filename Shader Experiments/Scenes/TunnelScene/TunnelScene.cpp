@@ -1,17 +1,16 @@
 #include "TunnelScene.h"
 #include "../../Application.h" 
 
-void TunnelScene::Init()
+TunnelScene::TunnelScene() : 
+    tunnelShder("./Shader/Tunnel/tunnelShader.vert", "./Shader/Tunnel/tunnelShader.frag"),
+    screen(std::vector<float>(std::begin(screenVertices), std::end(screenVertices)),{})
 {
-    tunnelShder.Init();
-
-    screen.Init();
     meshList.push_back(&screen);
 }
 
 void TunnelScene::Update(float dt) {}
 
-void TunnelScene::Draw(glm::mat4& view, glm::mat4& projection, glm::vec3& camPos, float time)
+void TunnelScene::Draw(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& camPos, float time)
 {
     for (int i = 0; i < meshList.size(); i++)
     {
@@ -24,6 +23,4 @@ void TunnelScene::OnActivate(ICameraControl* cameraControl)
     cameraControl->SetCameraConfig(2.5f, 1.0f, 0.0f);
 }
 
-void TunnelScene::OnGuiRender()
-{
-}
+void TunnelScene::OnGuiRender() {}

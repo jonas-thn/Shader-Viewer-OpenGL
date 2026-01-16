@@ -1,26 +1,30 @@
 #include "GrassScene.h"
-#include "../../Application.h" 
-void GrassScene::Init()
-{
-    standardShader.Init();
-    grassShader.Init();
+#include "../../Application.h"
 
-    plane.Init();
+GrassScene::GrassScene() : 
+    standardShader("./Shader/Standard/standardShader.vert", "./Shader/Standard/standardShader.frag"),
+    grassShader("./Shader/Grass/grassShader.vert", "./Shader/Grass/grassShader.frag"),
+
+    plane("./Models/quad.obj"),
+    sphere("./Models/sphere.obj"),
+
+    grass1("./Models/grass.obj"),
+    grass2("./Models/grass.obj")
+{
     plane.Translate(glm::vec3(0.0, -0.5, 0.0));
     plane.Rotate(90.0f, glm::vec3(1.0, 0.0, 0.0));
     plane.SetScale(glm::vec3(4.0));
 
-    sphere.Init();
     sphere.Translate(glm::vec3(1.0, 2.0, -2.0));
     sphere.SetScale(glm::vec3(0.5));
 
-    grass1.Init();
-    grass2.Init();
+     meshList.push_back(&plane);
+     meshList.push_back(&sphere);
 }
 
 void GrassScene::Update(float dt) {}
 
-void GrassScene::Draw(glm::mat4& view, glm::mat4& projection, glm::vec3& camPos, float time)
+void GrassScene::Draw(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& camPos, float time)
 {
     plane.Draw(standardShader, view, projection, camPos, time, 800, 0);
 

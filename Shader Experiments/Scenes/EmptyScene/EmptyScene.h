@@ -7,12 +7,11 @@ class Application;
 class EmptyScene : public Scene
 {
 public:
-    EmptyScene() = default;
+    EmptyScene();
     virtual ~EmptyScene() = default;
 
-    void Init() override;
     void Update(float dt) override;
-    void Draw(glm::mat4& view, glm::mat4& projection, glm::vec3& camPos, float time) override;
+    void Draw(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& camPos, float time) override;
 
     std::string GetName() const override { return "Empty"; }
 
@@ -21,6 +20,6 @@ public:
     void OnGuiRender() override;
 
 private:
-    Shader standardShader = Shader("./Shader/Standard/standardShader.vert", "./Shader/Standard/standardShader.frag");
-    Mesh text = Mesh("./Models/text.obj");
+    Shader standardShader;
+    Mesh text;
 };

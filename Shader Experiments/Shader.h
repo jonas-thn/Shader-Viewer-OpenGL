@@ -1,7 +1,6 @@
 #pragma once
 
 #include <GL/glew.h>
-
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -14,29 +13,30 @@
 class Shader
 {
 public:
-	Shader(const std::string& vertexPath, const std::string& fragmentPath, const std::string& geometryPath = "");
-	~Shader();
+    Shader(const std::string& vertexPath, const std::string& fragmentPath, const std::string& geometryPath = "");
 
-	Shader(const Shader&) = delete;
-	Shader& operator=(const Shader&) = delete;
+    ~Shader();
 
-	void Init();
-	void Use();
+    Shader(const Shader&) = delete;
+    Shader& operator=(const Shader&) = delete;
 
-	void SetBool(const std::string& name, bool value) const;
-	void SetInt(const std::string& name, int value) const;
-	void SetFloat(const std::string& name, float value) const;
+    Shader(Shader&& other) noexcept;
+    Shader& operator=(Shader&& other) noexcept;
 
-	void SetMat4(const std::string& name, glm::mat4 value);
-	void SetVec3(const std::string& name, glm::vec3 value);
-	void SetVec4(const std::string& name, glm::vec4 value);
+    void Use() const; 
 
-	unsigned int GetID();
+    void SetBool(const std::string& name, bool value) const;
+    void SetInt(const std::string& name, int value) const;
+    void SetFloat(const std::string& name, float value) const;
+
+    void SetMat4(const std::string& name, const glm::mat4& value) const; 
+    void SetVec3(const std::string& name, const glm::vec3& value) const;
+    void SetVec4(const std::string& name, const glm::vec4& value) const;
+
+    unsigned int GetID() const;
 
 private:
-	std::string vertexPath;
-	std::string fragmentPath;
-	std::string geometryPath;
+    void CheckCompileErrors(unsigned int shader, std::string type);
 
-	unsigned int shaderProgram;
+    unsigned int shaderProgram = 0;
 };
