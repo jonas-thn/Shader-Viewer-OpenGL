@@ -61,9 +61,13 @@ void LightingScene::OnActivate(ICameraControl* cameraControl)
 
 void LightingScene::OnGuiRender()
 {
-    ImGui::BulletText("Ambient");
-    ImGui::BulletText("Hemispheric");
-    ImGui::BulletText("Diffuse");
-    ImGui::BulletText("Specular");
-    ImGui::BulletText("Fresnel");
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Lighting Model:");
+    ImGui::BulletText("Lambertian Diffuse");
+    ImGui::BulletText("Phong Specular");
+    ImGui::Dummy(ImVec2(0.0f, 10.0f));
+
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Surface Effects:");
+    ImGui::BulletText("Hemispheric Ambient");
+    ImGui::BulletText("Fresnel Rim Lighting");
+    ImGui::BulletText("Conditional Material Indexing");
 }

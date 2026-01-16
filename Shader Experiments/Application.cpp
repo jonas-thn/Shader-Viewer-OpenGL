@@ -147,31 +147,40 @@ void Application::DrawGUI()
     ImGui::SetNextWindowPos(ImVec2((float)(width - uiWidth), 0.0f));
     ImGui::SetNextWindowSize(ImVec2((float)uiWidth, (float)height));
 
-    ImGui::Begin("Shader Scenes", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove);
+    ImGui::Begin("Shader Editor", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove);
 
-    const int buttonHeight = 20;
+    ImGui::SeparatorText("Select Scene");
 
-    for (const auto& scene : sceneList)
+    if (ImGui::BeginListBox("##SceneList", ImVec2(-1, 175))) 
     {
-        ImGui::SeparatorText(scene->GetName().c_str());
-
-        std::string btnLabel = "Load Scene##" + scene->GetName();
-
-        if (ImGui::Button(btnLabel.c_str(), ImVec2(-1, buttonHeight)))
+        for (int i = 0; i < sceneList.size(); i++)
         {
-            activeScene = scene.get();
-            activeScene->OnActivate(this);
+            Scene* s = sceneList[i].get();
+            bool isSelected = (activeScene == s);
+
+            if (ImGui::Selectable(s->GetName().c_str(), isSelected))
+            {
+                activeScene = s;
+                activeScene->OnActivate(this);
+            }
+
+            if (isSelected)
+            {
+                ImGui::SetItemDefaultFocus();
+            }
         }
+        ImGui::EndListBox();
+    }
 
-        if (activeScene == scene.get())
-        {
-            std::string infoText = scene->GetName() + " Shader:";
-            ImGui::Text("%s", infoText.c_str());
+    ImGui::Separator();
+    ImGui::Spacing();
 
-            scene->OnGuiRender();
-        }
-
-        ImGui::Dummy(ImVec2(0.0, 10.0));
+    if (activeScene)
+    {
+        ImGui::SeparatorText(activeScene->GetName().c_str());
+        ImGui::Spacing();
+    
+        activeScene->OnGuiRender();
     }
 
     ImGui::End();

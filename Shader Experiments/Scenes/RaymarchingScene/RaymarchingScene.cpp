@@ -25,8 +25,18 @@ void RaymarchingScene::OnActivate(ICameraControl* cameraControl)
 
 void RaymarchingScene::OnGuiRender()
 {
-    ImGui::BulletText("Smooth Blending");
-    ImGui::BulletText("Distance Fog");
-    ImGui::BulletText("Soft Shadows");
-    ImGui::BulletText("Ambient Occlusion");
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Core Technique:");
+    ImGui::BulletText("Raymarching (Sphere Tracing)");
+    ImGui::BulletText("Signed Distance Fields (SDF)");
+    ImGui::Dummy(ImVec2(0.0f, 10.0f));
+
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Lighting & Atmosphere:");
+    ImGui::BulletText("Soft Penumbra Shadows");
+    ImGui::BulletText("SDF-based Ambient Occlusion");
+    ImGui::BulletText("Exponential Depth Fog");
+    ImGui::Dummy(ImVec2(0.0f, 10.0f));
+
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Modeling Logic:");
+    ImGui::BulletText("Smooth Boolean Blending");
+    ImGui::BulletText("Dynamic Color Interpolation");
 }

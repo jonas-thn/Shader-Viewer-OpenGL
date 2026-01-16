@@ -23,4 +23,15 @@ void TunnelScene::OnActivate(ICameraControl* cameraControl)
     cameraControl->SetCameraConfig(2.5f, 1.0f, 0.0f);
 }
 
-void TunnelScene::OnGuiRender() {}
+void TunnelScene::OnGuiRender() 
+{
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Core Technique:");
+    ImGui::BulletText("Fractal Raymarching");
+    ImGui::BulletText("Infinite Repetition");
+    ImGui::Dummy(ImVec2(0.0f, 10.0f));
+
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Visuals:");
+    ImGui::BulletText("Sinewave Distortion");
+    ImGui::BulletText("Distance-Based Fog");
+    ImGui::Dummy(ImVec2(0.0f, 10.0f));
+}

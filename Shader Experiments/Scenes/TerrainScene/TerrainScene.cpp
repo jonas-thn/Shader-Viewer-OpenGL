@@ -25,6 +25,18 @@ void TerrainScene::OnActivate(ICameraControl* cameraControl)
 
 void TerrainScene::OnGuiRender()
 {
-    ImGui::BulletText("Procedual Generation");
-    ImGui::BulletText("Atmosphere");
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Core Technique:");
+    ImGui::BulletText("Terrain Raymarching");
+    ImGui::BulletText("Water Plane Union");
+    ImGui::Dummy(ImVec2(0.0f, 10.0f));
+
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Atmosphere:");
+    ImGui::BulletText("Distance Fog with Inscattering");
+    ImGui::BulletText("Sun Glow & Sky Gradient");
+    ImGui::BulletText("Hard Shadow Raycasting");
+    ImGui::Dummy(ImVec2(0.0f, 10.0f));
+
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Generation:");
+    ImGui::BulletText("Height-based Color Mixing");
+    ImGui::BulletText("Fractal Brownian Motion (FBM)");
 }

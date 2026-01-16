@@ -25,7 +25,13 @@ void WaterScene::OnActivate(ICameraControl* cameraControl)
 
 void WaterScene::OnGuiRender()
 {
-    ImGui::BulletText("Fractal Brownian Motion");
-    ImGui::BulletText("Sun Reflection");
-    ImGui::BulletText("Pseudo-Subsurface-Scattering");
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Core Technique:");
+    ImGui::BulletText("SDF Water Displacement");
+    ImGui::BulletText("FBM Noise Animation");
+    ImGui::Dummy(ImVec2(0.0f, 10.0f));
+
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Lighting Model:");
+    ImGui::BulletText("Physical Specular (Blinn-Phong)");
+    ImGui::BulletText("Dual-Layer Fresnel");
+    ImGui::BulletText("Height-Based Foam/Scattering");
 }

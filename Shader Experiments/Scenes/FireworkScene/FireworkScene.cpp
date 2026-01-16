@@ -25,6 +25,13 @@ void FireworkScene::OnActivate(ICameraControl* cameraControl)
 
 void FireworkScene::OnGuiRender()
 {
-    ImGui::BulletText("Particles");
-    ImGui::BulletText("Glow");
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Visual Technique:");
+    ImGui::BulletText("Procedural 2D Particles");
+    ImGui::BulletText("Additive Blending");
+    ImGui::Dummy(ImVec2(0.0f, 10.0f));
+
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Animation & Math:");
+    ImGui::BulletText("Polar Coordinate Expansion");
+    ImGui::BulletText("Time-Staggered Loops");
+    ImGui::BulletText("Hash-based Randomness");
 }

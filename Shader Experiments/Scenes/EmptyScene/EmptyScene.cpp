@@ -24,4 +24,7 @@ void EmptyScene::OnActivate(ICameraControl* cameraControl)
     cameraControl->SetCameraConfig(2.5f, 1.0f, 0.0f);
 }
 
-void EmptyScene::OnGuiRender() {}
+void EmptyScene::OnGuiRender() 
+{
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Select a Scene!");
+}

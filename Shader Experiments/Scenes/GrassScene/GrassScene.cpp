@@ -39,6 +39,17 @@ void GrassScene::OnActivate(ICameraControl* cameraControl)
 
 void GrassScene::OnGuiRender()
 {
-    ImGui::BulletText("Instancing");
-    ImGui::BulletText("Wind Bending");
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Core Technique:");
+    ImGui::BulletText("GPU Instancing");             
+    ImGui::BulletText("Procedural Vertex Displacement"); 
+    ImGui::Dummy(ImVec2(0.0f, 10.0f));
+
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Animation & Physics:");
+    ImGui::BulletText("Sine-Wave Wind Simulation");  
+    ImGui::BulletText("Dynamic Normal Recalculation");
+	ImGui::Dummy(ImVec2(0.0f, 10.0f));
+
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Visuals:");
+    ImGui::BulletText("3D Gradient Noise");          
+    ImGui::BulletText("Height-based Color Gradient");
 }

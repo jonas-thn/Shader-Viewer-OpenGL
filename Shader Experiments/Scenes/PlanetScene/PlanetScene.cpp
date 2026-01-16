@@ -25,7 +25,13 @@ void PlanetScene::OnActivate(ICameraControl* cameraControl)
 
 void PlanetScene::OnGuiRender()
 {
-    ImGui::BulletText("Signed Distance Fields");
-    ImGui::BulletText("Noise");
-    ImGui::BulletText("3D Mapping");
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Generation:");
+    ImGui::BulletText("Procedural 3D FBM Noise Terrain");
+    ImGui::BulletText("Bi-Planar Mapping & Moisture Mask");
+    ImGui::Dummy(ImVec2(0.0f, 10.0f));
+
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Lighting & Effects:");
+    ImGui::BulletText("Analytic Sphere Tracing");
+    ImGui::BulletText("SDF Atmosphere Glow");
+    ImGui::BulletText("Specular Water Masking");
 }

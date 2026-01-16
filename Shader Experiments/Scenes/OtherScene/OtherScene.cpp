@@ -42,8 +42,9 @@ void OtherScene::OnActivate(ICameraControl* cameraControl)
 
 void OtherScene::OnGuiRender()
 {
-    ImGui::BulletText("Dissolve");
-    ImGui::BulletText("Ripple");
-    ImGui::BulletText("Spherify");
-    ImGui::BulletText("Explosion");
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Other Shaders:");
+    ImGui::BulletText("Dissolve Shader");
+    ImGui::BulletText("Ripple Shader");
+    ImGui::BulletText("Spherify Shader");
+    ImGui::BulletText("Explosion Shader");
 }
