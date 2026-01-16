@@ -8,7 +8,6 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 uniform float time;
-uniform int index;
 
 out vec2 TexCoords;
 out vec3 Normals;

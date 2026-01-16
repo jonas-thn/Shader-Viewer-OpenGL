@@ -1,7 +1,15 @@
-# OpenGL Shader Experiments
--3D renderer and shader viewer made with C++ and OpenGL / SDL <br>
--following tutorials and experimenting with GLSL shaders <br>
--additional libs: glm, assimp, imgui <br> <br>
+# Shader Viewer OpenGL
+-**graphics renderer** and **shader viewer** made with C++ and OpenGL / SDL <br>
+-experimenting with **GLSL shaders, 3D graiphs and Software Architecture** <br>
+-**custom editor** inspired by [ShaderToy](https://www.shadertoy.com/) <br>
+-additional libs: glm, assimp, imgui <br> 
+
+### Custom Editor
+
+<img src="imgs/{5D47C5AC-CD86-46A5-973E-99D8B4E9ED50}.png" width="100%"/> 
+
+
+### Shader Experiments
 
 <table cellspacing="0" cellpadding="0">
   <tr>
