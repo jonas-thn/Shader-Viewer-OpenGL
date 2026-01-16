@@ -84,6 +84,9 @@
     <ClCompile Include="GLWindow.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Scenes\CustomScene\CustomScene.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image.h">
@@ -167,6 +170,9 @@
     <ClInclude Include="ICameraControl.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Scenes\CustomScene\CustomScene.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\Standard\standardShader.vert" />
@@ -189,6 +195,9 @@
     <None Include="Shader\Water\waterShader.frag" />
     <None Include="Shader\Tunnel\tunnelShader.vert" />
     <None Include="Shader\Tunnel\tunnelShader.frag" />
+    <None Include="Shader\Custom\customShader.vert" />
+    <None Include="Shader\Custom\customShader.frag" />
+    <None Include="Shader\Custom\customDefault.frag" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ImGui\LICENSE.txt" />

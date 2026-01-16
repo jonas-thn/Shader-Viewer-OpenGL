@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Scenes\CustomScene\CustomScene.cpp" />
     <ClCompile Include="GLWindow.cpp" />
     <ClCompile Include="Scenes\TunnelScene\TunnelScene.cpp" />
     <ClCompile Include="Scenes\FireworkScene\FireworkScene.cpp" />
@@ -161,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Scenes\CustomScene\CustomScene.h" />
     <ClInclude Include="GLWindow.h" />
     <ClInclude Include="ICameraControl.h" />
     <ClInclude Include="Scenes\TunnelScene\TunnelScene.h" />
@@ -189,6 +191,9 @@
     <ClInclude Include="Scenes\WaterScene\WaterScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Shader\Custom\customDefault.frag" />
+    <None Include="Shader\Custom\customShader.frag" />
+    <None Include="Shader\Custom\customShader.vert" />
     <None Include="Shader\Firework\fireworkShader.frag" />
     <None Include="Shader\Firework\fireworkShader.vert" />
     <None Include="Shader\Tunnel\tunnelShader.frag" />

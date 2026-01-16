@@ -15,6 +15,7 @@
 #include "Scenes/FireworkScene/FireworkScene.h"
 #include "Scenes/WaterScene/WaterScene.h"
 #include "Scenes/TunnelScene/TunnelScene.h"
+#include "Scenes/CustomScene/CustomScene.h"
 
 Application::Application()
 {
@@ -68,6 +69,7 @@ void Application::Setup()
     sceneList.push_back(std::make_shared<PlanetScene>());
     sceneList.push_back(std::make_shared<TerrainScene>());
     sceneList.push_back(std::make_shared<OtherScene>());
+    sceneList.push_back(std::make_shared<CustomScene>());
 
     if (!sceneList.empty())
     {
@@ -151,7 +153,7 @@ void Application::DrawGUI()
 
     ImGui::SeparatorText("Select Scene");
 
-    if (ImGui::BeginListBox("##SceneList", ImVec2(-1, 175))) 
+    if (ImGui::BeginListBox("##SceneList", ImVec2(-1, 189))) 
     {
         for (int i = 0; i < sceneList.size(); i++)
         {
